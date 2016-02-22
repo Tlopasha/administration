@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Presenters\Admin\AuthPresenter;
 use Validator;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -31,12 +32,29 @@ class AuthController extends Controller
     protected $redirectTo = '/admin';
 
     /**
+     * @var AuthPresenter
+     */
+    protected $presenter;
+
+    /**
      * Create a new authentication controller instance.
      *
-     * @return void
+     * @param AuthPresenter $presenter
      */
-    public function __construct()
+    public function __construct(AuthPresenter $presenter)
     {
         $this->middleware('guest', ['except' => 'logout']);
+
+        $this->presenter = $presenter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function showLoginForm()
+    {
+        $form = $this->presenter->form();
+
+        return view('admin.auth.login', compact('form'));
     }
 }

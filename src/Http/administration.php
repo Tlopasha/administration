@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['web']], function () {
     // The users resource.
     Route::resource('users', 'UserController');
 

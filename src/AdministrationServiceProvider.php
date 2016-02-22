@@ -67,7 +67,14 @@ class AdministrationServiceProvider extends ServiceProvider
 
         // Bind the form factory.
         $this->app->bind('Orchestra\Contracts\Html\Form\Factory', function ($app) {
-            return new FormFactory($app);
+            $factory = new FormFactory($app);
+
+            $factory->setConfig([
+                'format' => '<span class="label label-danger">:message</span>',
+                'view' => 'admin.components.form',
+            ]);
+
+            return $factory;
         });
 
         // Bind the table factory.
