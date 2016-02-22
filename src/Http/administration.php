@@ -13,7 +13,7 @@
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['web']], function () {
     // The administration setup group.
-    Route::group(['prefix' => 'setup', 'as' => 'setup.'], function () {
+    Route::group(['prefix' => 'setup', 'as' => 'setup.', 'middleware' => 'admin.setup'], function () {
         // The administration begin setup route.
         Route::get('begin', [
             'as' => 'begin',

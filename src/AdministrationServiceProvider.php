@@ -29,6 +29,9 @@ class AdministrationServiceProvider extends ServiceProvider
         // The requests path.
         $requests = __DIR__.'/Http/Requests/';
 
+        // The middleware path.
+        $middleware = __DIR__.'/Http/Middleware/';
+
         // The administration routes file.
         $routes = __DIR__.'/Http/administration.php';
 
@@ -41,6 +44,7 @@ class AdministrationServiceProvider extends ServiceProvider
         // The providers path.
         $providers = __DIR__.'/Providers/';
 
+        // The migrations path.
         $migrations = __DIR__.'/Migrations/';
 
         // The authorization tag.
@@ -53,6 +57,7 @@ class AdministrationServiceProvider extends ServiceProvider
             $controllers => app_path('Http/Controllers'),
             $presenters => app_path('Http/Presenters'),
             $requests => app_path('Http/Requests'),
+            $middleware => app_path('Http/Middleware'),
             $routes => app_path('Http/administration.php'),
             $models => app_path('Models'),
             $processors => app_path('Processors'),
