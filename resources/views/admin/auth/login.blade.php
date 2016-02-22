@@ -1,6 +1,10 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Login')
+@section('title.header')
+
+    <h3 class="text-center">@section('title') Login @show</h3>
+
+@endsection
 
 @section('content')
 

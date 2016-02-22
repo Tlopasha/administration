@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Processors\Admin\UserProcessor;
 
 class UserController extends Controller
@@ -30,5 +31,24 @@ class UserController extends Controller
     public function index()
     {
         return $this->processor->index();
+    }
+
+    public function create()
+    {
+        return $this->processor->create();
+    }
+
+    public function store(UserRequest $request)
+    {
+        if ($this->processor->store($request)) {
+            flash();
+        } else {
+
+        }
+    }
+
+    public function show()
+    {
+        //
     }
 }

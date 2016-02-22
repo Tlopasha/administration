@@ -3,7 +3,10 @@
 namespace App\Processors\Admin;
 
 use App\Http\Presenters\Admin\UserPresenter;
+use App\Http\Requests\UserRequest;
+use App\Jobs\Admin\User\Update;
 use App\Models\User;
+use App\Jobs\Admin\User\Store;
 use App\Processors\Processor;
 
 class UserProcessor extends Processor
@@ -37,7 +40,7 @@ class UserProcessor extends Processor
      */
     public function index()
     {
-        $this->authorize('users.index');
+        $this->authorize('admin.users.index');
 
         $users = $this->presenter->table($this->user);
 
@@ -51,30 +54,91 @@ class UserProcessor extends Processor
      */
     public function create()
     {
-        $this->authorize('users.create');
+        $this->authorize('admin.users.create');
 
         $form = $this->presenter->form($this->user);
 
         return view('admin.users.create', compact('form'));
     }
 
-    public function store()
+    /**
+     * Creates a new user.
+     *
+     * @param UserRequest $request
+     *
+     * @return bool
+     */
+    public function store(UserRequest $request)
     {
-        //
+        $this->authorize('admin.users.create');
+
+        $user = $this->user->newInstance();
+
+        return $this->dispatch(new Store($request, $user));
     }
 
-    public function edit()
+    /**
+     * Displays the specified user.
+     *
+     * @param int|string $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
     {
-        //
+        $this->authorize('admin.users.show');
+
+        $user = $this->user->with(['roles'])->findOrFail($id);
+
+        return view('admin.users.show', compact('user'));
     }
 
-    public function update()
+    /**
+     * Displays the form for editing the specified user.
+     *
+     * @param int|string $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
     {
-        //
+        $this->authorize('admin.users.edit');
+
+        $user = $this->user->findOrFail($id);
+
+        $form = $this->presenter->form($user);
+
+        return view('admin.users.edit', compact('form'));
     }
 
-    public function destroy()
+    /**
+     * Updates the specified user.
+     *
+     * @param UserRequest $request
+     * @param int|string  $id
+     *
+     * @return bool
+     */
+    public function update(UserRequest $request, $id)
     {
-        //
+        $this->authorize('admin.users.edit');
+
+        $user = $this->user->findOrFail($id);
+
+        return $this->dispatch(new Update($request, $user));
+    }
+
+    /**
+     * Deletes the specified user.
+     *
+     * @return bool
+     */
+    public function destroy($id)
+    {
+        $this->authorize('admin.users.destroy');
+
+        $user = $this->user->findOrFail($id);
+
+        return $user->delete();
     }
 }
