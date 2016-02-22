@@ -3,6 +3,9 @@
 namespace Stevebauman\Administration;
 
 use Illuminate\Support\ServiceProvider;
+use Orchestra\Html\Form\Factory as FormFactory;
+use Orchestra\Html\Table\Factory as TableFactory;
+use Orchestra\Html\HtmlServiceProvider;
 
 class AdministrationServiceProvider extends ServiceProvider
 {
@@ -26,8 +29,17 @@ class AdministrationServiceProvider extends ServiceProvider
         // The requests path.
         $requests = __DIR__.'/Http/Requests/';
 
+        // The administration routes file.
+        $routes = __DIR__.'/Http/administration.php';
+
+        // The models path.
+        $models = __DIR__.'/Models/';
+
         // The processors path.
         $processors = __DIR__.'/Processors/';
+
+        // The providers path.
+        $providers = __DIR__.'/Providers/';
 
         // The authorization tag.
         $tag = 'administration';
@@ -39,7 +51,10 @@ class AdministrationServiceProvider extends ServiceProvider
             $controllers => app_path('Http/Controllers'),
             $presenters => app_path('Http/Presenters'),
             $requests => app_path('Http/Requests'),
+            $routes => app_path('Http/administration.php'),
+            $models => app_path('Models'),
             $processors => app_path('Processors'),
+            $providers => app_path('Providers'),
         ], $tag);
     }
 
@@ -48,6 +63,23 @@ class AdministrationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(HtmlServiceProvider::class);
+
+        // Bind the form factory.
+        $this->app->bind('Orchestra\Contracts\Html\Form\Factory', function ($app) {
+            return new FormFactory($app);
+        });
+
+        // Bind the table factory.
+        $this->app->bind('Orchestra\Contracts\Html\Table\Factory', function ($app) {
+            $factory = new TableFactory($app);
+
+            $factory->setConfig([
+                'empty' => 'There are no records to display.',
+                'view' => 'admin.components.table',
+            ]);
+
+            return $factory;
+        });
     }
 }

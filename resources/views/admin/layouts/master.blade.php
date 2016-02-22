@@ -3,14 +3,14 @@
 <html lang="en">
 
 <head>
-    @include('layouts._header')
+    @include('admin.layouts._header')
 </head>
 
 <body id="app">
 
-@include('layouts._navigation')
+@include('admin.layouts._navigation')
 
-@include('layouts._flash')
+@include('admin.layouts._flash')
 
 @section('container')
 
@@ -42,7 +42,7 @@
 
 @section('footer')
 
-    @include('layouts._footer')
+    @include('admin.layouts._footer')
 
 @show
 

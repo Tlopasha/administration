@@ -13,9 +13,9 @@
 <link rel="{{ asset('css/libs/sweetalert.css') }}">
 <link rel="{{ asset('css/app.css') }}">
 
-<script type="text/javascript" src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/libs/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/libs/jquery.pjax.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/libs/select2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/libs/sweetalert.min.js') }}"></script>
 
@@ -23,6 +23,3 @@
 <!--[if lt IE 9]>
 <script type="text/javascript" src="{{ asset('js/libs/html5.js') }}"></script>
 <![endif]-->
-
-{!! $asset->styles() !!}
-{!! $asset->scripts() !!}
