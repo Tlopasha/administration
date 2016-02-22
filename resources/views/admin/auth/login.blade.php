@@ -4,6 +4,12 @@
 
 @section('content')
 
-    {!! $form !!}
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+        {!! $form !!}
+    </div>
+
+    <div class="col-md-3"></div>
 
 @endsection
