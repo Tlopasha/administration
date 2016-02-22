@@ -22,6 +22,7 @@
     <div class="row">
 
         <button type="submit" class="btn btn-lg btn-block btn-primary">
+            <i class="fa fa-lock"></i>
             {!! $submit !!}
         </button>
 

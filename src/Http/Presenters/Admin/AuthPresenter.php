@@ -26,9 +26,17 @@ class AuthPresenter extends Presenter
             $form->submit = 'Login';
 
             $form->fieldset(function (Fieldset $fieldset) {
-                $fieldset->control('input:text', 'email');
+                $fieldset
+                    ->control('input:text', 'email')
+                    ->attributes([
+                        'placeholder' => 'Enter your Email.',
+                    ]);
 
-                $fieldset->control('input:password', 'password');
+                $fieldset
+                    ->control('input:password', 'password')
+                    ->attributes([
+                        'placeholder' => 'Enter your Password.',
+                    ]);
             });
         });
     }

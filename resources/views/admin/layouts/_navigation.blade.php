@@ -37,7 +37,7 @@
                         <ul class="dropdown-menu">
 
                             <li>
-                                <a href="{{ route('auth.logout') }}">
+                                <a href="{{ route('admin.auth.logout') }}">
                                     <i class="fa fa-sign-out"></i> Logout
                                 </a>
                             </li>
@@ -49,7 +49,7 @@
                 @else
 
                     <li>
-                        <a href="#">
+                        <a href="{{ route('admin.auth.login') }}">
                             Login
                         </a>
                     </li>
