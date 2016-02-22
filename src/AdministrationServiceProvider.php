@@ -41,6 +41,8 @@ class AdministrationServiceProvider extends ServiceProvider
         // The providers path.
         $providers = __DIR__.'/Providers/';
 
+        $migrations = __DIR__.'/Migrations/';
+
         // The authorization tag.
         $tag = 'administration';
 
@@ -55,6 +57,7 @@ class AdministrationServiceProvider extends ServiceProvider
             $models => app_path('Models'),
             $processors => app_path('Processors'),
             $providers => app_path('Providers'),
+            $migrations => database_path('migrations'),
         ], $tag);
     }
 

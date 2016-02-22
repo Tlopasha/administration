@@ -15,4 +15,14 @@ class Role extends Model
      * @var string
      */
     protected $table = 'roles';
+
+    /**
+     * The fillable role attributes.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'label',
+    ];
 }

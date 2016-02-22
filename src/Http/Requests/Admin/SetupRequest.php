@@ -4,10 +4,10 @@ namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 
-class UserRequest extends Request
+class SetupRequest extends Request
 {
     /**
-     * The user request validation rules.
+     * The setup request validation rules.
      *
      * @return array
      */
@@ -22,7 +22,7 @@ class UserRequest extends Request
     }
 
     /**
-     * Allows all users to create users.
+     * Allows all users to complete setup.
      *
      * @return bool
      */

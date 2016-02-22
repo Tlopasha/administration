@@ -15,4 +15,14 @@ class Permission extends Model
      * @var string
      */
     protected $table = 'permissions';
+
+    /**
+     * The fillable permission attributes.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'label',
+    ];
 }

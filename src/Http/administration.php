@@ -12,6 +12,21 @@
 */
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['web']], function () {
+    // The administration setup group.
+    Route::group(['prefix' => 'setup', 'as' => 'setup.'], function () {
+        // The administration begin setup route.
+        Route::get('begin', [
+            'as' => 'begin',
+            'uses' => 'SetupController@begin',
+        ]);
+
+        // The administration finish setup route.
+        Route::post('finish', [
+            'as' => 'finish',
+            'uses' => 'SetupController@finish',
+        ]);
+    });
+
     // The users resource.
     Route::resource('users', 'UserController');
 
