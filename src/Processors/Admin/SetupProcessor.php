@@ -2,7 +2,7 @@
 
 namespace App\Processors\Admin;
 
-use App\Http\Jobs\Admin\Setup\Finish\Finish;
+use App\Jobs\Admin\Setup\Finish;
 use App\Http\Presenters\Admin\SetupPresenter;
 use App\Http\Requests\Admin\SetupRequest;
 use App\Models\Role;

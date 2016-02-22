@@ -21,6 +21,8 @@ class SetupPresenter extends Presenter
                 'url' => route('admin.setup.finish'),
             ]);
 
+            $form->submit = 'Complete Setup';
+
             $form->fieldset(function (Fieldset $fieldset) {
                 $fieldset
                     ->control('input:text', 'name')

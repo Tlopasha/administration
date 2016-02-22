@@ -44,6 +44,9 @@ class AdministrationServiceProvider extends ServiceProvider
         // The providers path.
         $providers = __DIR__.'/Providers/';
 
+        // The jobs path.
+        $jobs = __DIR__.'/Jobs/';
+
         // The migrations path.
         $migrations = __DIR__.'/Migrations/';
 
@@ -62,6 +65,7 @@ class AdministrationServiceProvider extends ServiceProvider
             $models => app_path('Models'),
             $processors => app_path('Processors'),
             $providers => app_path('Providers'),
+            $jobs => app_path('Jobs'),
             $migrations => database_path('migrations'),
         ], $tag);
     }

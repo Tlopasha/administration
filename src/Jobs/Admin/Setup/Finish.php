@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Jobs\Admin\Setup\Finish;
+namespace App\Jobs\Admin\Setup;
 
 use App\Http\Requests\Admin\SetupRequest;
 use App\Jobs\Job;
