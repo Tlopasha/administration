@@ -6,12 +6,12 @@
 <meta name="author" content="Author">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<link rel="{{ asset('css/libs/bootstrap.min.css') }}">
-<link rel="{{ asset('css/libs/font-awesome.min.css') }}">
-<link rel="{{ asset('css/libs/select2.css') }}">
-<link rel="{{ asset('css/libs/select2-bootstrap.css') }}">
-<link rel="{{ asset('css/libs/sweetalert.css') }}">
-<link rel="{{ asset('css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('css/libs/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/libs/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/libs/select2.css') }}">
+<link rel="stylesheet" href="{{ asset('css/libs/select2-bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/libs/sweetalert.css') }}">
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 <script type="text/javascript" src="{{ asset('js/libs/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/libs/jquery.pjax.js') }}"></script>

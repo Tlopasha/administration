@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a href="{{ route('welcome.index') }}" class="navbar-brand">
+            <a href="#" class="navbar-brand">
                 Administration
             </a>
 

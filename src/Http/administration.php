@@ -20,4 +20,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     // The permissions resource.
     Route::resource('permissions', 'PermissionController');
+
+    // Administration login view.
+    Route::get('auth/login', [
+        'as'    => 'auth.login',
+        'uses'  => 'AuthController@getLogin'
+    ]);
+
+    // Administration post login view.
+    Route::post('auth/login', [
+        'as'    => 'auth.login',
+        'uses'  => 'AuthController@postLogin',
+    ]);
+
+    // Administration logout.
+    Route::get('auth/logout', [
+        'as'    => 'auth.logout',
+        'uses'  => 'AuthController@getLogout',
+    ]);
 });
