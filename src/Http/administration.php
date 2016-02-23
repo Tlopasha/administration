@@ -12,12 +12,18 @@
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
+    Route::get('/', [
+        'as'    => 'admin.welcome.index',
+        'uses'  => 'WelcomeController@index',
+        'middleware' => ['admin.auth']
+    ]);
+
     // The administration setup group.
     Route::group(['prefix' => 'setup', 'as' => 'setup.', 'middleware' => ['admin.setup']], function () {
         // The administration begin setup route.
         Route::get('/', [
-            'as' => 'welcome',
-            'uses' => 'SetupController@welcome',
+            'as'    => 'welcome',
+            'uses'  => 'SetupController@welcome',
         ]);
 
         Route::get('begin', [
@@ -27,38 +33,45 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
 
         // The administration finish setup route.
         Route::post('finish', [
-            'as' => 'finish',
-            'uses' => 'SetupController@finish',
+            'as'    => 'finish',
+            'uses'  => 'SetupController@finish',
         ]);
     });
 
-    // The users resource.
-    Route::resource('users', 'UserController');
+    Route::group(['middleware' => ['admin.auth']], function () {
+        // The users resource.
+        Route::resource('users', 'UserController');
 
-    // The roles resource.
-    Route::resource('roles', 'RoleController');
+        // The roles resource.
+        Route::resource('roles', 'RoleController');
 
-    // The permissions resource.
-    Route::resource('permissions', 'PermissionController');
+        // The permissions resource.
+        Route::resource('permissions', 'PermissionController');
+    });
 
     // The 'admin' route prefixed group.
     Route::group(['as' => 'admin.', ], function () {
-        // Administration login view.
-        Route::get('auth/login', [
-            'as'    => 'auth.login',
-            'uses'  => 'AuthController@getLogin'
-        ]);
 
-        // Administration post login view.
-        Route::post('auth/login', [
-            'as'    => 'auth.login',
-            'uses'  => 'AuthController@postLogin',
-        ]);
+        // Guest Middleware group for login routes.
+        Route::group(['middleware' => ['guest']], function () {
+            // Administration login view.
+            Route::get('auth/login', [
+                'as'    => 'auth.login',
+                'uses'  => 'AuthController@getLogin'
+            ]);
+
+            // Administration post login view.
+            Route::post('auth/login', [
+                'as'    => 'auth.login',
+                'uses'  => 'AuthController@postLogin',
+            ]);
+        });
 
         // Administration logout.
         Route::get('auth/logout', [
-            'as'    => 'auth.logout',
-            'uses'  => 'AuthController@getLogout',
+            'as'            => 'auth.logout',
+            'uses'          => 'AuthController@getLogout',
+            'middleware'    => ['admin.auth']
         ]);
     });
 
