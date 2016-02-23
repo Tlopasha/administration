@@ -32,6 +32,13 @@ class AuthController extends Controller
     protected $redirectTo = '/admin';
 
     /**
+     * Where to redirect the users after logging out.
+     *
+     * @var string
+     */
+    protected $redirectAfterLogout = '/admin/auth/login';
+
+    /**
      * @var AuthPresenter
      */
     protected $presenter;
@@ -43,8 +50,6 @@ class AuthController extends Controller
      */
     public function __construct(AuthPresenter $presenter)
     {
-        $this->middleware('guest', ['except' => 'logout']);
-
         $this->presenter = $presenter;
     }
 
