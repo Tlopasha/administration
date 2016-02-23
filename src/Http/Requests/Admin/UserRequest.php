@@ -13,12 +13,21 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        return [
+        $user = $this->route('users');
+
+        $rules = [
             'name' => 'required|min:2',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
+            'email' => "required|email|unique:users,email,$user",
         ];
+
+        if ($this->route()->getName() === 'admin.users.update') {
+            $rules['password'] = 'confirmed';
+        } else {
+            $rules['password'] = 'required|confirmed';
+            $rules['password_confirmation'] = 'required';
+        }
+
+        return $rules;
     }
 
     /**
