@@ -2,7 +2,7 @@
 
 namespace App\Jobs\Admin\User;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\Jobs\Job;
 use App\Models\User;
 
