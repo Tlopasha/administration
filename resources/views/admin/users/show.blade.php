@@ -11,11 +11,6 @@
             Edit
         </a>
 
-        <a href="#" class="btn btn-sm btn-warning">
-            <i class="fa fa-lock"></i>
-            Change Password
-        </a>
-
         {{-- Prevent user from deleting self. --}}
         @if (request()->user()->getKey() != $user->getKey())
 
