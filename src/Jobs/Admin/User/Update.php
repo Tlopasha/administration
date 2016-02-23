@@ -59,7 +59,6 @@ class Update extends Job
             $builder->whereName('administrator');
         })->get();
 
-
         $admin = Role::whereName('administrator')->first();
 
         // We need to verify that if the user is trying to remove all roles on themselves,
