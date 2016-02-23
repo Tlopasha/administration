@@ -22,13 +22,13 @@ class UserPresenter extends Presenter
     {
         return $this->form->of('users', function (FormGrid $form) use ($user) {
             if ($user->exists) {
-                $method = 'POST';
-                $url = route('admin.users.store');
+                $method = 'PATCH';
+                $url = route('admin.users.update', [$user->getKey()]);
 
                 $form->submit = 'Save';
             } else {
-                $method = 'PATCH';
-                $url = route('admin.users.update', [$user->getKey()]);
+                $method = 'POST';
+                $url = route('admin.users.store');
 
                 $form->submit = 'Create';
             }
