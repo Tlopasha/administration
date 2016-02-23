@@ -13,7 +13,7 @@ class SeedRolesAndPermissions extends Migration
      */
     public function up()
     {
-        Role::firstOrCreate([
+        $administrator = Role::firstOrCreate([
             'name' => 'administrator',
             'label' => 'Administrator',
         ]);
@@ -42,6 +42,8 @@ class SeedRolesAndPermissions extends Migration
             'name' => 'admin.users.destroy',
             'label' => 'Delete Users',
         ]);
+
+        $administrator->grant(Permission::all());
     }
 
     /**
