@@ -3,7 +3,7 @@
 namespace App\Processors\Admin;
 
 use App\Http\Presenters\Admin\UserPresenter;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\Jobs\Admin\User\Update;
 use App\Models\User;
 use App\Jobs\Admin\User\Store;
