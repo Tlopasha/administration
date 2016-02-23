@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\Admin\CannotRemoveRolesException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\Processors\Admin\UserProcessor;
 
 class UserController extends Controller
@@ -97,15 +98,22 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        if ($this->processor->update($request, $id)) {
-            flash()->success('Success!', 'Successfully updated user.');
+        try {
+            if ($this->processor->update($request, $id)) {
+                flash()->success('Success!', 'Successfully updated user.');
 
-            return redirect()->route('admin.users.show', [$id]);
-        } else {
-            flash()->error('Error!', 'There was an issue updating this user. Please try again.');
+                return redirect()->route('admin.users.show', [$id]);
+            } else {
+                flash()->error('Error!', 'There was an issue updating this user. Please try again.');
+
+                return redirect()->route('admin.users.edit', [$id]);
+            }
+        } catch (CannotRemoveRolesException $e) {
+            flash()->setTimer(null)->error('Error!', $e->getMessage());
 
             return redirect()->route('admin.users.edit', [$id]);
         }
+
     }
 
     /**
