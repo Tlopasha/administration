@@ -25,4 +25,14 @@ class Role extends Model
         'name',
         'label',
     ];
+
+    /**
+     * Returns an HTML display label for the current role.
+     *
+     * @return string
+     */
+    public function getDisplayLabelAttribute()
+    {
+        return sprintf('<span class="label label-primary"><i class="fa fa-users"></i> %s</span>', $this->label);
+    }
 }
