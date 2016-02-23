@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a href="#" class="navbar-brand">
+            <a href="{{ route('admin.welcome.index') }}" class="navbar-brand">
                 Administration
             </a>
 
@@ -21,56 +21,60 @@
 
             <ul class="nav navbar-nav">
 
-                <li class="dropdown {{ active()->route('admin.users.*') }}" id="admin-users-menu">
-                    <a  href="#admin-users-menu" rel="admin-users-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-users"></i>
-                        Users
-                        <i class="fa fa-caret-down"></i>
-                    </a>
+                @if(auth()->check())
 
-                    <ul class="dropdown-menu">
-                        <li class="{{ active()->route('admin.users.*') }}">
-                            <a href="{{ route('admin.users.index') }}">
-                                <i class="fa fa-list"></i>
-                                All Users
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="dropdown {{ active()->route('admin.users.*') }}" id="admin-users-menu">
+                        <a  href="#admin-users-menu" rel="admin-users-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            Users
+                            <i class="fa fa-caret-down"></i>
+                        </a>
 
-                <li class="dropdown {{ active()->route('admin.roles.*') }}" id="admin-roles-menu">
-                    <a  href="#admin-roles-menu" rel="admin-roles-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user-md"></i>
-                        Roles
-                        <i class="fa fa-caret-down"></i>
-                    </a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ active()->route('admin.users.*') }}">
+                                <a href="{{ route('admin.users.index') }}">
+                                    <i class="fa fa-list"></i>
+                                    All Users
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-                    <ul class="dropdown-menu">
-                        <li class="{{ active()->route('admin.roles.*') }}">
-                            <a href="{{ route('admin.roles.index') }}">
-                                <i class="fa fa-list"></i>
-                                All Roles
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="dropdown {{ active()->route('admin.roles.*') }}" id="admin-roles-menu">
+                        <a  href="#admin-roles-menu" rel="admin-roles-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user-md"></i>
+                            Roles
+                            <i class="fa fa-caret-down"></i>
+                        </a>
 
-                <li class="dropdown {{ active()->route('admin.permissions.*') }}" id="admin-permissions-menu">
-                    <a  href="#admin-permissions-menu" rel="admin-permissions-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-check-circle-o"></i>
-                        Permissions
-                        <i class="fa fa-caret-down"></i>
-                    </a>
+                        <ul class="dropdown-menu">
+                            <li class="{{ active()->route('admin.roles.*') }}">
+                                <a href="{{ route('admin.roles.index') }}">
+                                    <i class="fa fa-list"></i>
+                                    All Roles
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-                    <ul class="dropdown-menu">
-                        <li class="{{ active()->route('admin.permissions.*') }}">
-                            <a href="{{ route('admin.permissions.index') }}">
-                                <i class="fa fa-list"></i>
-                                All Permissions
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="dropdown {{ active()->route('admin.permissions.*') }}" id="admin-permissions-menu">
+                        <a  href="#admin-permissions-menu" rel="admin-permissions-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-check-circle-o"></i>
+                            Permissions
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="{{ active()->route('admin.permissions.*') }}">
+                                <a href="{{ route('admin.permissions.index') }}">
+                                    <i class="fa fa-list"></i>
+                                    All Permissions
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                @endif
 
             </ul>
 
@@ -88,7 +92,7 @@
                         <ul class="dropdown-menu">
 
                             <li>
-                                <a href="{{ route('admin.auth.logout') }}">
+                                <a class="force-reload" href="{{ route('admin.auth.logout') }}">
                                     <i class="fa fa-sign-out"></i> Logout
                                 </a>
                             </li>
