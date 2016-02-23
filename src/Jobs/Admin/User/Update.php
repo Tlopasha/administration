@@ -49,7 +49,13 @@ class Update extends Job
 
         // Verify before changing the users password that it's not empty.
         if (!empty($password)) {
-            $this->user->password = bcrypt($this->request->input('password'));
+            // If the user doesn't have a set password mutator,
+            // we'll encrypt the password.
+            if (!$this->user->hasSetMutator('password')) {
+                $password = bcrypt($password);
+            }
+
+            $this->user->password = $password;
         }
 
         $roles = $this->request->input('roles', []);

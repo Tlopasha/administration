@@ -39,7 +39,16 @@ class Store extends Job
     {
         $this->user->name = $this->request->input('name');
         $this->user->email = $this->request->input('email');
-        $this->user->password = bcrypt($this->request->input('password'));
+
+        $password = $this->request->input('password');
+
+        // If the user doesn't have a set password mutator,
+        // we'll encrypt the password.
+        if (!$this->user->hasSetMutator('password')) {
+            $password = bcrypt($password);
+        }
+
+        $this->user->password = $password;
 
         return $this->user->save();
     }
