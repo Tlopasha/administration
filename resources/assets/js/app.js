@@ -13,12 +13,17 @@ $(function ()
             location.reload();
         });
 
-        // Issue Users select.
+        // User Roles select.
+        $(".select-roles").select2({
+            placeholder: formatPlaceholder
+        });
+
+        // Users select.
         $(".select-users").select2({
             placeholder: formatPlaceholder
         });
 
-        // Issue Labels select.
+        // Labels select.
         $(".select-labels").select2({
             formatResult: formatLabel,
             formatSelection: formatLabel,
