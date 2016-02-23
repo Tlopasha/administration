@@ -9,7 +9,8 @@
     "laravel/framework": "~5.2",
     "orchestra/html": "~3.2",
     "stevebauman/authorization": "1.0.*",
-    "stevebauman/flash": "1.0.*"
+    "stevebauman/flash": "1.0.*",
+    "stevebauman/active": "1.0.*"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.8",
