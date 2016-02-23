@@ -8,6 +8,11 @@ $(function ()
 
     // Re-initialize js on successful pjax requests.
     $(document).on('ready pjax:success', function() {
+        // Force reloads on links clicked with the force-reload class.
+        $('.force-reload').click(function () {
+            location.reload();
+        });
+
         // Issue Users select.
         $(".select-users").select2({
             placeholder: formatPlaceholder
