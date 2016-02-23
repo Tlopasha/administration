@@ -24,6 +24,16 @@ class SetupController extends Controller
     }
 
     /**
+     * Displays the welcome page for setting up administration.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function welcome()
+    {
+        return $this->processor->welcome();
+    }
+
+    /**
      * Displays the form for setting up administration.
      *
      * @return \Illuminate\View\View

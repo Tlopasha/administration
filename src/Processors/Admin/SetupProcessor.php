@@ -41,6 +41,16 @@ class SetupProcessor extends Processor
     }
 
     /**
+     * Displays the welcome page for setting up administration.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function welcome()
+    {
+        return view('admin.setup.welcome');
+    }
+
+    /**
      * Displays the form for setting up administration.
      *
      * @return \Illuminate\View\View
