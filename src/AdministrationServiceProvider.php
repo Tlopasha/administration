@@ -38,6 +38,9 @@ class AdministrationServiceProvider extends ServiceProvider
         // The models path.
         $models = __DIR__.'/Models/';
 
+        // The exceptions path.
+        $exceptions = __DIR__.'/Exceptions/';
+
         // The processors path.
         $processors = __DIR__.'/Processors/';
 
@@ -63,6 +66,7 @@ class AdministrationServiceProvider extends ServiceProvider
             $middleware => app_path('Http/Middleware'),
             $routes => app_path('Http/administration.php'),
             $models => app_path('Models'),
+            $exceptions => app_path('Exceptions'),
             $processors => app_path('Processors'),
             $providers => app_path('Providers'),
             $jobs => app_path('Jobs'),
