@@ -24,21 +24,43 @@ class UserPresenter extends Presenter
             if ($user->exists) {
                 $method = 'POST';
                 $url = route('admin.users.store');
+
+                $form->submit = 'Save';
             } else {
                 $method = 'PATCH';
                 $url = route('admin.users.update', [$user->getKey()]);
+
+                $form->submit = 'Create';
             }
 
             $form->attributes(compact('method', 'url'));
 
+            $form->with($user);
+
             $form->fieldset(function (Fieldset $fieldset) {
-                $fieldset->control('input:text', 'name');
+                $fieldset
+                    ->control('input:text', 'name')
+                    ->attributes([
+                        'placeholder' => 'Enter the users name.',
+                    ]);
 
-                $fieldset->control('input:text', 'email');
+                $fieldset
+                    ->control('input:text', 'email')
+                    ->attributes([
+                        'placeholder' => 'Enter the users email address.',
+                    ]);
 
-                $fieldset->control('input:password', 'password');
+                $fieldset
+                    ->control('input:password', 'password')
+                    ->attributes([
+                        'placeholder' => 'Enter a password to change the users password.',
+                    ]);
 
-                $fieldset->control('input:password_confirmation', 'password');
+                $fieldset
+                    ->control('input:password', 'password_confirmation')
+                    ->attributes([
+                        'placeholder' => 'Enter the users password again.',
+                    ]);
             });
         });
     }
@@ -68,7 +90,7 @@ class UserPresenter extends Presenter
                     $labels = '';
 
                     foreach($user->roles as $role) {
-                        $labels .= $role->display_label;
+                        $labels .= $role->display_label.'<br>';
                     };
 
                     return $labels;

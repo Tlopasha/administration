@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Stevebauman\Authorization\Traits\PermissionRolesTrait;
 
 class Permission extends Model
