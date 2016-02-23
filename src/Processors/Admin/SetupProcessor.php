@@ -5,17 +5,11 @@ namespace App\Processors\Admin;
 use App\Jobs\Admin\Setup\Finish;
 use App\Http\Presenters\Admin\SetupPresenter;
 use App\Http\Requests\Admin\SetupRequest;
-use App\Models\Role;
 use App\Models\User;
 use App\Processors\Processor;
 
 class SetupProcessor extends Processor
 {
-    /**
-     * @var Role
-     */
-    protected $role;
-
     /**
      * @var User
      */
@@ -29,13 +23,11 @@ class SetupProcessor extends Processor
     /**
      * Constructor.
      *
-     * @param Role           $role
      * @param User           $user
      * @param SetupPresenter $presenter
      */
-    public function __construct(Role $role, User $user, SetupPresenter $presenter)
+    public function __construct(User $user, SetupPresenter $presenter)
     {
-        $this->role = $role;
         $this->user = $user;
         $this->presenter = $presenter;
     }
