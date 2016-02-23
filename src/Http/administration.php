@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['web']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
     // The administration setup group.
     Route::group(['prefix' => 'setup', 'as' => 'setup.', 'middleware' => ['admin.setup']], function () {
         // The administration begin setup route.
@@ -41,21 +41,25 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['web']], f
     // The permissions resource.
     Route::resource('permissions', 'PermissionController');
 
-    // Administration login view.
-    Route::get('auth/login', [
-        'as'    => 'auth.login',
-        'uses'  => 'AuthController@getLogin'
-    ]);
+    // The 'admin' route prefixed group.
+    Route::group(['as' => 'admin.', ], function () {
+        // Administration login view.
+        Route::get('auth/login', [
+            'as'    => 'auth.login',
+            'uses'  => 'AuthController@getLogin'
+        ]);
 
-    // Administration post login view.
-    Route::post('auth/login', [
-        'as'    => 'auth.login',
-        'uses'  => 'AuthController@postLogin',
-    ]);
+        // Administration post login view.
+        Route::post('auth/login', [
+            'as'    => 'auth.login',
+            'uses'  => 'AuthController@postLogin',
+        ]);
 
-    // Administration logout.
-    Route::get('auth/logout', [
-        'as'    => 'auth.logout',
-        'uses'  => 'AuthController@getLogout',
-    ]);
+        // Administration logout.
+        Route::get('auth/logout', [
+            'as'    => 'auth.logout',
+            'uses'  => 'AuthController@getLogout',
+        ]);
+    });
+
 });

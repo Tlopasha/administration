@@ -4,6 +4,7 @@ namespace App\Http\Presenters\Admin;
 
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
+use Orchestra\Contracts\Html\Table\Column;
 use Orchestra\Contracts\Html\Table\Grid as TableGrid;
 use App\Models\User;
 use App\Http\Presenters\Presenter;
@@ -54,8 +55,25 @@ class UserPresenter extends Presenter
         return $this->table->of('users', function (TableGrid $table) use ($user) {
             $table->with($user)->paginate($this->perPage);
 
-            $table->column('name');
+            $table->column('name', function (Column $column) {
+                $column->value = function (User $user) {
+                    return link_to_route('admin.users.show', $user->name, [$user->getKey()]);
+                };
+            });
+
             $table->column('email');
+
+            $table->column('roles', function (Column $column) {
+                $column->value = function (User $user) {
+                    $labels = '';
+
+                    foreach($user->roles as $role) {
+                        $labels .= $role->display_label;
+                    };
+
+                    return $labels;
+                };
+            });
         });
     }
 }
