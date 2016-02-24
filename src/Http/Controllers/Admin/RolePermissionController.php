@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Steve
- * Date: 2/24/2016
- * Time: 11:28 AM
- */
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\RolePermissionRequest;
 
 class RolePermissionController
 {
@@ -16,7 +11,7 @@ class RolePermissionController
         //
     }
 
-    public function store($roleId)
+    public function store(RolePermissionRequest $request, $roleId)
     {
         //
     }
