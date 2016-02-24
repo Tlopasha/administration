@@ -126,7 +126,7 @@ class RolePresenter extends Presenter
                         // aren't apart of the current role.
                         return Permission::whereDoesntHave('roles', function (Builder $builder) use ($role) {
                             $builder->whereName($role->name);
-                        })->get()->pluck('name', 'id');
+                        })->get()->pluck('label', 'id');
                     })
                     ->attributes([
                         'class' => 'select-users',
@@ -187,7 +187,7 @@ class RolePresenter extends Presenter
     {
         $users = $role->users()->orderBy('name');
 
-        return $this->table->of('roles.users', function (TableGrid $table) use ($users) {
+        return $this->table->of('roles.users', function (TableGrid $table) use ($role, $users) {
             $table->with($users)->paginate(10);
 
             $table->pageName = 'users';
@@ -212,9 +212,9 @@ class RolePresenter extends Presenter
                 });
             });
 
-            $table->column('remove', function (Column $column) {
-                $column->value = function (User $user) {
-                    return link_to('', 'Remove', [
+            $table->column('remove', function (Column $column) use ($role) {
+                $column->value = function (User $user) use ($role) {
+                    return link_to_route('admin.roles.users.destroy', 'Remove', [$role->getKey(), $user->getKey()], [
                         'class' => 'btn btn-xs btn-danger',
                         'data-post' => 'DELETE',
                         'data-title' => 'Are you sure?',
@@ -236,7 +236,7 @@ class RolePresenter extends Presenter
     {
         $permissions = $role->permissions()->orderBy('name');
 
-        return $this->table->of('roles.permissions', function (TableGrid $table) use ($permissions) {
+        return $this->table->of('roles.permissions', function (TableGrid $table) use ($role, $permissions) {
             $table->with($permissions)->paginate(10);
 
             $table->pageName = 'permissions';
@@ -261,9 +261,9 @@ class RolePresenter extends Presenter
                 });
             });
 
-            $table->column('remove', function (Column $column) {
-                $column->value = function (Permission $permission) {
-                    return link_to('', 'Remove', [
+            $table->column('remove', function (Column $column) use ($role) {
+                $column->value = function (Permission $permission) use ($role) {
+                    return link_to_route('admin.roles.permissions.destroy', 'Remove', [$role->getKey(), $permission->getKey()], [
                         'class' => 'btn btn-xs btn-danger',
                         'data-post' => 'DELETE',
                         'data-title' => 'Are you sure?',
