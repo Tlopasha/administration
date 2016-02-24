@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
     ]);
 
     // The administration setup group.
-    Route::group(['prefix' => 'setup', 'as' => 'setup.', 'middleware' => ['admin.setup']], function () {
+    Route::group(['prefix' => 'setup', 'as' => 'admin.setup.', 'middleware' => ['admin.setup']], function () {
         // The administration begin setup route.
         Route::get('/', [
             'as'    => 'welcome',
@@ -41,6 +41,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
     Route::group(['middleware' => ['admin.auth']], function () {
         // The users resource.
         Route::resource('users', 'UserController');
+
+        // The user permissions resource.
+        Route::resource('users.permissions', [
+            'only' => ['store', 'destroy']
+        ]);
 
         // The roles resource.
         Route::resource('roles', 'RoleController');
