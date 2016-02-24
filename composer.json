@@ -8,7 +8,7 @@
     "php": ">=5.5.9",
     "laravel/framework": "~5.2",
     "orchestra/html": "~3.2",
-    "stevebauman/authorization": "1.1.*",
+    "stevebauman/authorization": "1.2.*",
     "stevebauman/flash": "1.0.*",
     "stevebauman/active": "1.0.*"
   },
