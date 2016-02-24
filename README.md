@@ -27,7 +27,7 @@ Stevebauman\Administration\AdministrationServiceProvider::class,
 
 Now run `php artisan vendor:publish --tag="authorization"`.
 
-Then run `php arisan vendor:publish --tag="administration".
+Then run `php arisan vendor:publish --tag="administration"`.
 
 Now insert the following providers in your `config/app.php`:
 

@@ -169,4 +169,53 @@ class UserPresenter extends Presenter
             });
         });
     }
+
+    /**
+     * Returns a new table for the specified role permissions.
+     *
+     * @param User $user
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function tablePermissions(User $user)
+    {
+        $permissions = $user->permissions()->orderBy('name');
+
+        return $this->table->of('users.permissions', function (TableGrid $table) use ($user, $permissions) {
+            $table->with($permissions)->paginate(10);
+
+            $table->pageName = 'permissions';
+
+            $table->column('label', function (Column $column) {
+                $column->value = function (Permission $permission) {
+                    return link_to_route('admin.permissions.show', $permission->label, [$permission->getKey()]);
+                };
+            });
+
+            $table->column('name', function (Column $column) {
+                // We'll remove this column when
+                // viewing on smaller screens.
+                $column->headers = [
+                    'class' => 'hidden-xs',
+                ];
+
+                $column->attributes(function () {
+                    return [
+                        'class' => 'hidden-xs',
+                    ];
+                });
+            });
+
+            $table->column('remove', function (Column $column) use ($user) {
+                $column->value = function (Permission $permission) use ($user) {
+                    return link_to_route('admin.users.permissions.destroy', 'Remove', [$user->getKey(), $permission->getKey()], [
+                        'class' => 'btn btn-xs btn-danger',
+                        'data-post' => 'DELETE',
+                        'data-title' => 'Are you sure?',
+                        'data-message' => 'Are you sure you want to remove this permission?',
+                    ]);
+                };
+            });
+        });
+    }
 }

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
         Route::resource('users', 'UserController');
 
         // The user permissions resource.
-        Route::resource('users.permissions', [
+        Route::resource('users.permissions', 'UserPermissionController', [
             'only' => ['store', 'destroy']
         ]);
 

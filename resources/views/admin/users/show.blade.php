@@ -86,4 +86,51 @@
 
     </div>
 
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <i class="fa fa-check-circle-o"></i>
+            <span class="hidden-xs">User Specific</span> Permissions
+
+            <a data-toggle="modal" data-target="#form-permissions" class="btn btn-xs btn-success pull-right">
+                <i class="fa fa-plus-circle"></i>
+                Add
+            </a>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="modal fade" id="form-permissions" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                            <h4 class="modal-title">
+                                <i class="fa fa-check-circle-o"></i>
+                                Add Permissions
+                            </h4>
+
+                        </div>
+
+                        {!! $formPermissions !!}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {!! $permissions !!}
+
+        </div>
+
+    </div>
+
 @endsection

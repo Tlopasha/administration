@@ -90,7 +90,11 @@ class UserProcessor extends Processor
 
         $user = $this->user->with(['roles'])->findOrFail($id);
 
-        return view('admin.users.show', compact('user'));
+        $permissions = $this->presenter->tablePermissions($user);
+
+        $formPermissions = $this->presenter->formPermissions($user);
+
+        return view('admin.users.show', compact('user', 'permissions', 'formPermissions'));
     }
 
     /**
