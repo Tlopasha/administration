@@ -40,6 +40,8 @@ class RoleProcessor extends Processor
      */
     public function index()
     {
+        $this->authorize('admin.roles.index');
+
         $roles = $this->presenter->table($this->role);
 
         return view('admin.roles.index', compact('roles'));
@@ -52,6 +54,8 @@ class RoleProcessor extends Processor
      */
     public function create()
     {
+        $this->authorize('admin.roles.create');
+
         $form = $this->presenter->form($this->role);
 
         return view('admin.roles.create', compact('form'));
@@ -66,6 +70,8 @@ class RoleProcessor extends Processor
      */
     public function store(RoleRequest $request)
     {
+        $this->authorize('admin.roles.store');
+
         $role = $this->role->newInstance();
 
         return $this->dispatch(new Store($request, $role));
@@ -80,6 +86,8 @@ class RoleProcessor extends Processor
      */
     public function show($id)
     {
+        $this->authorize('admin.roles.show');
+
         $role = $this->role->with('users')->findOrFail($id);
 
         $users = $this->presenter->tableUsers($role);
@@ -102,6 +110,8 @@ class RoleProcessor extends Processor
      */
     public function edit($id)
     {
+        $this->authorize('admin.roles.edit');
+
         $role = $this->role->findOrFail($id);
 
         $form = $this->presenter->form($role);
@@ -119,6 +129,8 @@ class RoleProcessor extends Processor
      */
     public function update(RoleRequest $request, $id)
     {
+        $this->authorize('admin.roles.update');
+
         $role = $this->role->findOrFail($id);
 
         return $this->dispatch(new Update($request, $role));
@@ -133,6 +145,8 @@ class RoleProcessor extends Processor
      */
     public function destroy($id)
     {
+        $this->authorize('admin.roles.destroy');
+
         $role = $this->role->findOrFail($id);
 
         return $role->delete();
