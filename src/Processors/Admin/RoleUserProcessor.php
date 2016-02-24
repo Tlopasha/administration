@@ -2,10 +2,12 @@
 
 namespace App\Processors\Admin;
 
+use App\Exceptions\Admin\CannotRemoveRolesException;
 use App\Http\Requests\Admin\RoleUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Processors\Processor;
+use Illuminate\Database\Eloquent\Builder;
 
 class RoleUserProcessor extends Processor
 {
@@ -41,6 +43,8 @@ class RoleUserProcessor extends Processor
      */
     public function store(RoleUserRequest $request, $roleId)
     {
+        $this->authorize('admin.roles.users.store');
+
         $role = $this->role->findOrFail($roleId);
 
         $users = $request->input('users', []);
@@ -60,13 +64,34 @@ class RoleUserProcessor extends Processor
      * @param int|string $roleId
      * @param int|string $userId
      *
+     * @throws CannotRemoveRolesException
+     *
      * @return int
      */
     public function destroy($roleId, $userId)
     {
+        $this->authorize('admin.roles.users.destroy');
+
         $role = $this->role->findOrFail($roleId);
 
         $user = $role->users()->findOrFail($userId);
+
+        // Retrieve all administrators.
+        $administrators = $this->user->whereHas('roles', function (Builder $builder) {
+            $builder->whereName('administrator');
+        })->get();
+
+        $admin = Role::whereName('administrator')->first();
+
+        // We need to verify that if the user is trying to remove all roles on themselves,
+        // and they are the only administrator, that we throw an exception notifying them
+        // that they can't do that. Though we want to allow the user to remove the
+        // administrator role if more than one administrator exists.
+        if ($user->hasRole($admin)
+            && $user->getKey() === auth()->user()->getKey()
+            && count($administrators) === 1) {
+            throw new CannotRemoveRolesException("Unable to remove the administrator role from this user. You're the only administrator.");
+        }
 
         return $role->users()->detach($user);
     }

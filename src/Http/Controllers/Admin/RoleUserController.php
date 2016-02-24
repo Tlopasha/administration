@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\Admin\CannotRemoveRolesException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleUserRequest;
 use App\Processors\Admin\RoleUserProcessor;
@@ -54,12 +55,18 @@ class RoleUserController extends Controller
      */
     public function destroy($roleId, $userId)
     {
-        if ($this->processor->destroy($roleId, $userId)) {
-            flash()->success('Success!', 'Successfully removed user.');
+        try {
+            if ($this->processor->destroy($roleId, $userId)) {
+                flash()->success('Success!', 'Successfully removed user.');
 
-            return redirect()->route('admin.roles.show', [$roleId]);
-        } else {
-            flash()->error('Error!', 'There was an issue removing this user. Please try again.');
+                return redirect()->route('admin.roles.show', [$roleId]);
+            } else {
+                flash()->error('Error!', 'There was an issue removing this user. Please try again.');
+
+                return redirect()->route('admin.roles.show', [$roleId]);
+            }
+        } catch (CannotRemoveRolesException $e) {
+            flash()->setTimer(null)->error('Error!', $e->getMessage());
 
             return redirect()->route('admin.roles.show', [$roleId]);
         }
