@@ -8,6 +8,15 @@ for your current application, complete with a secure setup process.
 
 Every application is different, and you shouldn't be locked into an administrator panel managed by a different developer.
 
+## Features
+
+- Setup wizard for easy deployment
+- User management with user specific permissions
+- Permission Management
+- Role Management
+- Clean, customizable UI
+- Thoroughly documented code with 100% customizability
+
 ## Installation
 
 Require `administration` in your `composer.json` file:
