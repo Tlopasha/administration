@@ -23,7 +23,7 @@
 
                 @if(auth()->check())
 
-                    <li class="dropdown {{ active()->route('admin.users.*') }}" id="admin-users-menu">
+                    <li class="dropdown {{ active()->resource('admin.users') }}" id="admin-users-menu">
                         <a  href="#admin-users-menu" rel="admin-users-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-users"></i>
                             Users
@@ -31,7 +31,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li class="{{ active()->route('admin.users.*') }}">
+                            <li class="{{ active()->resource('admin.users') }}">
                                 <a href="{{ route('admin.users.index') }}">
                                     <i class="fa fa-list"></i>
                                     All Users
@@ -40,7 +40,7 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown {{ active()->route('admin.roles.*') }}" id="admin-roles-menu">
+                    <li class="dropdown {{ active()->resource('admin.roles') }}" id="admin-roles-menu">
                         <a  href="#admin-roles-menu" rel="admin-roles-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user-md"></i>
                             Roles
@@ -48,7 +48,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li class="{{ active()->route('admin.roles.*') }}">
+                            <li class="{{ active()->resource('admin.roles') }}">
                                 <a href="{{ route('admin.roles.index') }}">
                                     <i class="fa fa-list"></i>
                                     All Roles
@@ -57,7 +57,7 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown {{ active()->route('admin.permissions.*') }}" id="admin-permissions-menu">
+                    <li class="dropdown {{ active()->resource('admin.permissions') }}" id="admin-permissions-menu">
                         <a  href="#admin-permissions-menu" rel="admin-permissions-menu" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-check-circle-o"></i>
                             Permissions
@@ -65,7 +65,7 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li class="{{ active()->route('admin.permissions.*') }}">
+                            <li class="{{ active()->resource('admin.permissions') }}">
                                 <a href="{{ route('admin.permissions.index') }}">
                                     <i class="fa fa-list"></i>
                                     All Permissions

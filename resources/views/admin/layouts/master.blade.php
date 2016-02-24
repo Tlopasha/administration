@@ -20,7 +20,7 @@
             @yield('extra.top')
         </div>
 
-        <div id="app" class="col-lg-12">
+        <div class="col-lg-12">
             @section('title.header')
 
                 @unless(isset($title))

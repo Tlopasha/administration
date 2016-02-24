@@ -1,9 +1,10 @@
 $(function ()
 {
-    $(document).pjax('a', '#main');
+    // Bind Pjax to the app container.
+    $(document).pjax('a', '#app');
 
     $(document).on('pjax:beforeSend', function () {
-        // Initialize loader.
+        // Initialize loading screen.
     });
 
     // Re-initialize js on successful pjax requests.
