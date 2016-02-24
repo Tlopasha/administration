@@ -167,6 +167,22 @@ class UserPresenter extends Presenter
                     return $labels;
                 };
             });
+
+            $table->column('created_at_human', function (Column $column) {
+                $column->label = 'Created';
+
+                // We'll remove this column when
+                // viewing on smaller screens.
+                $column->headers = [
+                    'class' => 'hidden-xs',
+                ];
+
+                $column->attributes(function () {
+                    return [
+                        'class' => 'hidden-xs',
+                    ];
+                });
+            });
         });
     }
 
