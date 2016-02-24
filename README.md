@@ -17,6 +17,7 @@ Every application is different, and you shouldn't be locked into an administrato
 - Clean, customizable UI
 - Thoroughly documented code with 100% customizability
 - Thoroughly implements clean separation of concerns
+- Completely mobile compatible with 100% responsive layout (using Bootstrap 3)
 - Pjax implementation for an app-like feel
 
 ## Installation
