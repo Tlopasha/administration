@@ -16,6 +16,7 @@ Every application is different, and you shouldn't be locked into an administrato
 - Role Management
 - Clean, customizable UI
 - Thoroughly documented code with 100% customizability
+- Pjax implementation for an app-like feel
 
 ## Installation
 
