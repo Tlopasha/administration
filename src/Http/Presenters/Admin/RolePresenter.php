@@ -2,6 +2,7 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Models\Permission;
 use App\Models\User;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
@@ -91,10 +92,12 @@ class RolePresenter extends Presenter
      */
     public function tableUsers(Role $role)
     {
-        $users = $role->users();
+        $users = $role->users()->orderBy('name');
 
         return $this->table->of('roles.users', function (TableGrid $table) use ($users) {
-            $table->with($users)->paginate($this->perPage);
+            $table->with($users)->paginate(10);
+
+            $table->pageName = 'users';
 
             $table->column('name', function (Column $column) {
                 $column->value = function (User $user) {
@@ -107,10 +110,47 @@ class RolePresenter extends Presenter
             $table->column('remove', function (Column $column) {
                 $column->value = function (User $user) {
                     return link_to('', 'Remove', [
-                        'class' => 'btn btn-sm btn-danger',
+                        'class' => 'btn btn-xs btn-danger',
                         'data-post' => 'DELETE',
                         'data-title' => 'Are you sure?',
                         'data-message' => 'Are you sure you want to remove this user?',
+                    ]);
+                };
+            });
+        });
+    }
+
+    /**
+     * Returns a new table for the specified role permissions.
+     *
+     * @param Role $role
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function tablePermissions(Role $role)
+    {
+        $permissions = $role->permissions()->orderBy('name');
+
+        return $this->table->of('roles.permissions', function (TableGrid $table) use ($permissions) {
+            $table->with($permissions)->paginate(10);
+
+            $table->pageName = 'permissions';
+
+            $table->column('label', function (Column $column) {
+                $column->value = function (Permission $permission) {
+                    return link_to_route('admin.permissions.show', $permission->label, [$permission->getKey()]);
+                };
+            });
+
+            $table->column('name');
+
+            $table->column('remove', function (Column $column) {
+                $column->value = function (Permission $permission) {
+                    return link_to('', 'Remove', [
+                        'class' => 'btn btn-xs btn-danger',
+                        'data-post' => 'DELETE',
+                        'data-title' => 'Are you sure?',
+                        'data-message' => 'Are you sure you want to remove this permission?',
                     ]);
                 };
             });

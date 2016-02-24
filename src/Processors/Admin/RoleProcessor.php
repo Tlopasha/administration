@@ -84,7 +84,9 @@ class RoleProcessor extends Processor
 
         $users = $this->presenter->tableUsers($role);
 
-        return view('admin.roles.show', compact('role', 'users'));
+        $permissions = $this->presenter->tablePermissions($role);
+
+        return view('admin.roles.show', compact('role', 'users', 'permissions'));
     }
 
     /**
@@ -100,7 +102,7 @@ class RoleProcessor extends Processor
 
         $form = $this->presenter->form($role);
 
-        return view('admin.roles.show', compact('form', 'role'));
+        return view('admin.roles.edit', compact('form', 'role'));
     }
 
     /**

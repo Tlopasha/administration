@@ -41,7 +41,7 @@
 
         <div class="panel-body">
 
-            <table class="table">
+            <table class="table table-striped">
 
                 <tbody>
 
@@ -63,16 +63,31 @@
 
     </div>
 
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
 
         <div class="panel-heading">
-            <i class="fa fa-list"></i>
+            <i class="fa fa-users"></i>
             Users Assigned to this Role
         </div>
 
         <div class="panel-body">
 
             {!! $users !!}
+
+        </div>
+
+    </div>
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+            <i class="fa fa-check-circle-o"></i>
+            Permissions in this Role
+        </div>
+
+        <div class="panel-body">
+
+            {!! $permissions !!}
 
         </div>
 

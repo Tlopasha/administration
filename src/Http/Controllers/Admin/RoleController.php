@@ -94,7 +94,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, $id)
     {
         if ($this->processor->update($request, $id)) {
-            flash()->success('Success!', 'Successfully created role.');
+            flash()->success('Success!', 'Successfully updated role.');
 
             return redirect()->route('admin.roles.show', [$id]);
         } else {
