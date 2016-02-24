@@ -2,6 +2,7 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Models\Role;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
@@ -37,7 +38,7 @@ class UserPresenter extends Presenter
 
             $form->with($user);
 
-            $form->fieldset(function (Fieldset $fieldset) {
+            $form->fieldset(function (Fieldset $fieldset) use ($user) {
                 $fieldset
                     ->control('input:text', 'name')
                     ->attributes([
@@ -49,6 +50,22 @@ class UserPresenter extends Presenter
                     ->attributes([
                         'placeholder' => 'Enter the users email address.',
                     ]);
+
+                if ($user->exists) {
+                    $fieldset
+                        ->control('input:select', 'roles[]')
+                        ->label('Roles')
+                        ->options(function () {
+                            return Role::all()->pluck('label', 'id');
+                        })
+                        ->value(function (User $user) {
+                            return $user->roles->pluck('id');
+                        })
+                        ->attributes([
+                            'class' => 'select-roles',
+                            'multiple' => true,
+                        ]);
+                }
 
                 $fieldset
                     ->control('input:password', 'password')
