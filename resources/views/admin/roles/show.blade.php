@@ -66,13 +66,40 @@
             <i class="fa fa-users"></i>
             Users <span class="hidden-xs">Assigned to this Role</span>
 
-            <a href="#" class="btn btn-xs btn-success pull-right">
+            <a data-toggle="modal" data-target="#form-users" class="btn btn-xs btn-success pull-right">
                 <i class="fa fa-plus-circle"></i>
                 Add
             </a>
         </div>
 
         <div class="panel-body">
+
+            <div class="modal fade" id="form-users" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                            <h4 class="modal-title">
+                                <i class="fa fa-users"></i>
+                                Add Users
+                            </h4>
+
+                        </div>
+
+                        {!! $formUsers !!}
+
+                    </div>
+
+                </div>
+
+            </div>
 
             {!! $users !!}
 
@@ -86,13 +113,40 @@
             <i class="fa fa-check-circle-o"></i>
             Permissions <span class="hidden-xs">in this Role</span>
 
-            <a href="#" class="btn btn-xs btn-success pull-right">
+            <a data-toggle="modal" data-target="#form-permissions" class="btn btn-xs btn-success pull-right">
                 <i class="fa fa-plus-circle"></i>
                 Add
             </a>
         </div>
 
         <div class="panel-body">
+
+            <div class="modal fade" id="form-permissions" tabindex="-1" role="dialog">
+
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                            <h4 class="modal-title">
+                                <i class="fa fa-check-circle-o"></i>
+                                Add Permissions
+                            </h4>
+
+                        </div>
+
+                        {!! $formPermissions !!}
+
+                    </div>
+
+                </div>
+
+            </div>
 
             {!! $permissions !!}
 

@@ -4,6 +4,7 @@ namespace App\Http\Presenters\Admin;
 
 use App\Models\Permission;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
@@ -50,6 +51,86 @@ class RolePresenter extends Presenter
                     ->control('input:text', 'label')
                     ->attributes([
                         'placeholder' => 'Enter the roles display label.',
+                    ]);
+            });
+        });
+    }
+
+    /**
+     * Returns a new form for attaching users to the specified role.
+     *
+     * @param Role $role
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function formUsers(Role $role)
+    {
+        return $this->form->of('roles.users', function (FormGrid $form) use ($role) {
+            $method = 'POST';
+            $url = route('admin.roles.users.store', [$role->getKey()]);
+
+            $form->attributes(compact('method', 'url'));
+
+            $form->with($role);
+
+            $form->layout('admin.components.form-modal');
+
+            $form->submit = 'Save';
+
+            $form->fieldset(function (Fieldset $fieldset) {
+                $fieldset
+                    ->control('input:select', 'users[]')
+                    ->label('Users')
+                    ->options(function (Role $role) {
+                        // We'll only allow users to select users that
+                        // aren't apart of the current role.
+                        return User::whereDoesntHave('roles', function (Builder $builder) use ($role) {
+                            $builder->whereName($role->name);
+                        })->get()->pluck('name', 'id');
+                    })
+                    ->attributes([
+                        'class' => 'select-users',
+                        'multiple' => true,
+                    ]);
+            });
+        });
+    }
+
+    /**
+     * Returns a new form for attaching permissions to the specified role.
+     *
+     * @param Role $role
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function formPermissions(Role $role)
+    {
+        return $this->form->of('roles.permissions', function (FormGrid $form) use ($role) {
+            $method = 'POST';
+            $url = route('admin.roles.permissions.store', [$role->getKey()]);
+
+            $form->attributes(compact('method', 'url'));
+
+            $form->with($role);
+
+            $form->layout('admin.components.form-modal');
+
+            $form->submit = 'Save';
+
+            $form->fieldset(function (Fieldset $fieldset) {
+                $fieldset
+                    ->control('input:select', 'permissions[]')
+                    ->label('Permissions')
+                    ->options(function (Role $role) {
+                        // We'll only allow users to select permissions that
+                        // aren't apart of the current role.
+                        return Permission::whereDoesntHave('roles', function (Builder $builder) use ($role) {
+                            $builder->whereName($role->name);
+                        })->get()->pluck('name', 'id');
+                    })
+                    ->attributes([
+                        'class' => 'select-users',
+                        'multiple' => true,
                     ]);
             });
         });
