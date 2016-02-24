@@ -70,7 +70,7 @@ class RoleProcessor extends Processor
      */
     public function store(RoleRequest $request)
     {
-        $this->authorize('admin.roles.store');
+        $this->authorize('admin.roles.create');
 
         $role = $this->role->newInstance();
 
@@ -129,7 +129,7 @@ class RoleProcessor extends Processor
      */
     public function update(RoleRequest $request, $id)
     {
-        $this->authorize('admin.roles.update');
+        $this->authorize('admin.roles.edit');
 
         $role = $this->role->findOrFail($id);
 
