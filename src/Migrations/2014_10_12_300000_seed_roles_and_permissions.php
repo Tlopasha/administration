@@ -96,6 +96,39 @@ class SeedRolesAndPermissions extends Migration
             'label' => 'Delete Permissions',
         ]);
 
+        // User Permission Permissions
+        Permission::firstOrCreate([
+            'name' => 'admin.users.permissions.store',
+            'label' => 'Add Permissions to Users',
+        ]);
+
+        Permission::firstOrCreate([
+            'name' => 'admin.users.permissions.destroy',
+            'label' => 'Remove Permissions from Users',
+        ]);
+
+        // Role Permission Permissions
+        Permission::firstOrCreate([
+            'name' => 'admin.roles.permissions.store',
+            'label' => 'Add Permissions to Roles',
+        ]);
+
+        Permission::firstOrCreate([
+            'name' => 'admin.roles.permissions.destroy',
+            'label' => 'Remove Permissions from Roles',
+        ]);
+
+        // Role User Permissions
+        Permission::firstOrCreate([
+            'name' => 'admin.roles.users.store',
+            'label' => 'Add Users to Roles',
+        ]);
+
+        Permission::firstOrCreate([
+            'name' => 'admin.roles.users.destroy',
+            'label' => 'Remove Users from Roles',
+        ]);
+
         $administrator->grant(Permission::all());
     }
 
@@ -128,5 +161,17 @@ class SeedRolesAndPermissions extends Migration
         Permission::whereName('admin.permissions.edit')->delete();
         Permission::whereName('admin.permissions.show')->delete();
         Permission::whereName('admin.permissions.destroy')->delete();
+
+        // Delete User Permission Permissions
+        Permission::whereName('admin.users.permissions.store')->delete();
+        Permission::whereName('admin.users.permissions.destroy')->delete();
+
+        // Delete Role Permission Permissions
+        Permission::whereName('admin.roles.permissions.store')->delete();
+        Permission::whereName('admin.roles.permissions.destroy')->delete();
+
+        // Delete Role User Permissions
+        Permission::whereName('admin.roles.users.destroy')->delete();
+        Permission::whereName('admin.roles.users.destroy')->delete();
     }
 }
