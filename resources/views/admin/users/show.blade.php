@@ -68,9 +68,15 @@
                 <tr>
                     <th>Roles</th>
                     <td>
-                        @foreach($user->roles as $role)
-                            {!! $role->display_label !!} <br>
-                        @endforeach
+                        @if($user->roles->count() > 0)
+                            @foreach($user->roles as $role)
+                                {!! $role->display_label !!} <br>
+                            @endforeach
+                        @else
+
+                            <em>No Roles</em>
+
+                        @endif
                     </td>
                 </tr>
 

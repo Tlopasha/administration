@@ -31,7 +31,7 @@ class UserRequest extends Request
     }
 
     /**
-     * Allows all users to create users.
+     * Allows all users to create / edit users.
      *
      * @return bool
      */
