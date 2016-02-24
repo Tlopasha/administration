@@ -100,7 +100,19 @@ class UserPresenter extends Presenter
                 };
             });
 
-            $table->column('email');
+            $table->column('email', function (Column $column) {
+                // We'll remove this column when
+                // viewing on smaller screens.
+                $column->headers = [
+                    'class' => 'hidden-xs',
+                ];
+
+                $column->attributes(function () {
+                    return [
+                        'class' => 'hidden-xs',
+                    ];
+                });
+            });
 
             $table->column('roles', function (Column $column) {
                 $column->value = function (User $user) {

@@ -73,7 +73,19 @@ class RolePresenter extends Presenter
                 };
             });
 
-            $table->column('name');
+            $table->column('name', function (Column $column) {
+                // We'll remove this column when
+                // viewing on smaller screens.
+                $column->headers = [
+                    'class' => 'hidden-xs',
+                ];
+
+                $column->attributes(function () {
+                    return [
+                        'class' => 'hidden-xs',
+                    ];
+                });
+            });
 
             $table->column('users', function (Column $column) {
                 $column->value = function (Role $role) {
