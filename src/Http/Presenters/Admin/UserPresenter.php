@@ -2,7 +2,9 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Models\Permission;
 use App\Models\Role;
+use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
@@ -77,6 +79,46 @@ class UserPresenter extends Presenter
                     ->control('input:password', 'password_confirmation')
                     ->attributes([
                         'placeholder' => 'Enter the users password again.',
+                    ]);
+            });
+        });
+    }
+
+    /**
+     * Returns a new form for adding permissions to the specified user.
+     *
+     * @param User $user
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function formPermissions(User $user)
+    {
+        return $this->form->of('users.permissions', function (FormGrid $form) use ($user) {
+            $method = 'POST';
+            $url = route('admin.users.permissions.store', [$user->getKey()]);
+
+            $form->attributes(compact('method', 'url'));
+
+            $form->with($user);
+
+            $form->layout('admin.components.form-modal');
+
+            $form->submit = 'Save';
+
+            $form->fieldset(function (Fieldset $fieldset) {
+                $fieldset
+                    ->control('input:select', 'permissions[]')
+                    ->label('Permissions')
+                    ->options(function (User $user) {
+                        // We'll only allow users to select permissions that
+                        // aren't apart of the current role.
+                        return Permission::whereDoesntHave('users', function (Builder $builder) use ($user) {
+                            $builder->whereEmail($user->email);
+                        })->get()->pluck('label', 'id');
+                    })
+                    ->attributes([
+                        'class' => 'select-users',
+                        'multiple' => true,
                     ]);
             });
         });
