@@ -41,12 +41,14 @@ class RolePermissionProcessor extends Processor
      */
     public function store(RolePermissionRequest $request, $roleId)
     {
+        $this->authorize('admin.roles.permissions.store');
+
         $role = $this->role->findOrFail($roleId);
 
         $permissions = $request->input('permissions', []);
 
         if (count($permissions) > 0) {
-            $permissions = $this->role->findMany($permissions);
+            $permissions = $this->permission->findMany($permissions);
 
             return $role->permissions()->saveMany($permissions);
         }
@@ -64,6 +66,8 @@ class RolePermissionProcessor extends Processor
      */
     public function destroy($roleId, $permissionId)
     {
+        $this->authorize('admin.roles.permissions.destroy');
+
         $role = $this->role->findOrFail($roleId);
 
         $permission = $role->permissions()->findOrFail($permissionId);
