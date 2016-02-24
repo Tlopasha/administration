@@ -4,39 +4,37 @@
 
 @section('content')
 
-    <div class="btn-group">
-
-        <a href="{{ route('admin.users.edit', [$user->getKey()]) }}" class="btn btn-sm btn-warning">
-            <i class="fa fa-edit"></i>
-            Edit
-        </a>
-
-        {{-- Prevent user from deleting self. --}}
-        @if (request()->user()->getKey() != $user->getKey())
-
-            <a
-                    data-post="POST"
-                    data-title="Delete User?"
-                    data-message="Are you sure you want to delete this user?"
-                    href="{{ route('admin.users.destroy', [$user->getKey()]) }}"
-                    class="btn btn-sm btn-danger"
-            >
-                <i class="fa fa-trash"></i>
-                Delete
-            </a>
-
-        @endif
-
-    </div>
-
-    <!-- Spacing -->
-    <p></p>
-
     <div class="panel panel-primary">
 
         <div class="panel-heading">
             <i class="fa fa-list"></i>
-            Profile Details
+            Profile <span class="hidden-xs">Details</span>
+
+            <div class="btn-group pull-right">
+
+                <a href="{{ route('admin.users.edit', [$user->getKey()]) }}" class="btn btn-xs btn-warning">
+                    <i class="fa fa-edit"></i>
+                    Edit
+                </a>
+
+                {{-- Prevent user from deleting self. --}}
+                @if (request()->user()->getKey() != $user->getKey())
+
+                    <a
+                            data-post="POST"
+                            data-title="Delete User?"
+                            data-message="Are you sure you want to delete this user?"
+                            href="{{ route('admin.users.destroy', [$user->getKey()]) }}"
+                            class="btn btn-xs btn-danger"
+                    >
+                        <i class="fa fa-trash"></i>
+                        Delete
+                    </a>
+
+                @endif
+
+            </div>
+
         </div>
 
         <div class="panel-body">
