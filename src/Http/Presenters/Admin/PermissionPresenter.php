@@ -4,6 +4,8 @@ namespace App\Http\Presenters\Admin;
 
 use App\Models\Role;
 use App\Models\User;
+use Orchestra\Contracts\Html\Form\Field;
+use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
 use Orchestra\Contracts\Html\Table\Grid as TableGrid;
@@ -22,7 +24,43 @@ class PermissionPresenter extends Presenter
     public function form(Permission $permission)
     {
         return $this->form->of('permissions', function (FormGrid $form) use ($permission) {
+            if ($permission->exists) {
+                $method = 'PATCH';
+                $url = route('admin.permissions.update', [$permission->getKey()]);
 
+                $form->submit = 'Save';
+            } else {
+                $method = 'POST';
+                $url = route('admin.permissions.store');
+
+                $form->submit = 'Create';
+            }
+
+            $form->attributes(compact('method', 'url'));
+
+            $form->with($permission);
+
+            $form->fieldset(function (Fieldset $fieldset) use ($permission) {
+                $fieldset->control('input:text', 'name', function (Field $field) use ($permission) {
+                    $attributes = [
+                        'placeholder' => 'Enter the permissions name.',
+                    ];
+
+                    // We don't want to allow users to change the permission name since this
+                    // could cause issues with authorization down the line.
+                    if ($permission->exists) {
+                        $attributes['disabled'] = true;
+                    }
+
+                    $field->attributes($attributes);
+                });
+
+                $fieldset
+                    ->control('input:text', 'label')
+                    ->attributes([
+                        'placeholder' => 'Enter the permissions label.',
+                    ]);
+            });
         });
     }
 
@@ -35,12 +73,58 @@ class PermissionPresenter extends Presenter
      */
     public function table(Permission $permission)
     {
+        $permission = $permission->with('roles');
+
         return $this->table->of('permissions', function (TableGrid $table) use ($permission) {
             $table->with($permission)->paginate($this->perPage);
 
-            $table->column('label');
+            $table->column('label', function (Column $column) {
+                $column->value = function (Permission $permission) {
+                    return link_to_route('admin.permissions.show', $permission->label, [$permission->getKey()]);
+                };
+            });
 
-            $table->column('name');
+            $table->column('name', function (Column $column) {
+                // We'll remove this column when
+                // viewing on smaller screens.
+                $column->headers = [
+                    'class' => 'hidden-xs',
+                ];
+
+                $column->attributes(function () {
+                    return [
+                        'class' => 'hidden-xs',
+                    ];
+                });
+            });
+
+            $table->column('roles', function (Column $column) {
+                $column->value = function (Permission $permission) {
+                    $labels = '';
+
+                    foreach($permission->roles as $role) {
+                        $labels .= $role->display_label.'<br>';
+                    };
+
+                    return $labels;
+                };
+            });
+
+            $table->column('created_at_human', function (Column $column) {
+                $column->label = 'Created';
+
+                // We'll remove this column when
+                // viewing on smaller screens.
+                $column->headers = [
+                    'class' => 'hidden-xs',
+                ];
+
+                $column->attributes(function () {
+                    return [
+                        'class' => 'hidden-xs',
+                    ];
+                });
+            });
         });
     }
 
@@ -134,8 +218,8 @@ class PermissionPresenter extends Presenter
             });
 
             $table->column('remove', function (Column $column) use ($permission) {
-                $column->value = function (User $user) use ($permission) {
-                    return link_to_route('admin.permissions.roles.destroy', 'Remove', [$permission->getKey(), $user->getKey()], [
+                $column->value = function (Role $role) use ($permission) {
+                    return link_to_route('admin.permissions.roles.destroy', 'Remove', [$permission->getKey(), $role->getKey()], [
                         'class' => 'btn btn-xs btn-danger',
                         'data-post' => 'DELETE',
                         'data-title' => 'Are you sure?',
