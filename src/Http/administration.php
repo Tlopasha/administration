@@ -76,7 +76,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
 
     // The 'admin' route prefixed group.
     Route::group(['as' => 'admin.'], function () {
-
         // Guest Middleware group for login routes.
         Route::group(['middleware' => ['guest']], function () {
             // Administration login view.
