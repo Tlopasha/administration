@@ -125,7 +125,7 @@ class RoleController extends Controller
                 return redirect()->route('admin.roles.show', [$id]);
             }
         } catch (CannotDeleteAdministratorRole $e) {
-            flash()->error('Error!', $e->getMessage());
+            flash()->setTimer(null)->error('Error!', $e->getMessage());
 
             return redirect()->route('admin.roles.show', [$id]);
         }

@@ -152,7 +152,7 @@ class RoleProcessor extends Processor
 
         $role = $this->role->findOrFail($id);
 
-        if ($this->role->isAdministrator()) {
+        if ($role->isAdministrator()) {
             throw new CannotDeleteAdministratorRole("You can't delete the administrator role.");
         }
 
