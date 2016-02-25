@@ -2,9 +2,9 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Http\Presenters\Presenter;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
-use App\Http\Presenters\Presenter;
 
 class AuthPresenter extends Presenter
 {
@@ -18,7 +18,7 @@ class AuthPresenter extends Presenter
         return $this->form->of('auth', function (FormGrid $form) {
             $form->attributes([
                 'method' => 'POST',
-                'url' => route('admin.auth.login'),
+                'url'    => route('admin.auth.login'),
             ]);
 
             $form->layout('admin.components.form-login');

@@ -16,7 +16,7 @@ class UserRequest extends Request
         $user = $this->route('users');
 
         $rules = [
-            'name' => 'required|min:2',
+            'name'  => 'required|min:2',
             'email' => "required|email|unique:users,email,$user",
         ];
 

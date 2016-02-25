@@ -2,13 +2,13 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Http\Presenters\Presenter;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
 use Orchestra\Contracts\Html\Table\Grid as TableGrid;
-use App\Http\Presenters\Presenter;
-use App\Models\Permission;
 
 class PermissionPresenter extends Presenter
 {
@@ -83,9 +83,9 @@ class PermissionPresenter extends Presenter
             $table->column('remove', function (Column $column) use ($permission) {
                 $column->value = function (User $user) use ($permission) {
                     return link_to_route('admin.permissions.users.destroy', 'Remove', [$permission->getKey(), $user->getKey()], [
-                        'class' => 'btn btn-xs btn-danger',
-                        'data-post' => 'DELETE',
-                        'data-title' => 'Are you sure?',
+                        'class'        => 'btn btn-xs btn-danger',
+                        'data-post'    => 'DELETE',
+                        'data-title'   => 'Are you sure?',
                         'data-message' => 'Are you sure you want to remove this permission from this user?',
                     ]);
                 };
@@ -136,9 +136,9 @@ class PermissionPresenter extends Presenter
             $table->column('remove', function (Column $column) use ($permission) {
                 $column->value = function (User $user) use ($permission) {
                     return link_to_route('admin.permissions.roles.destroy', 'Remove', [$permission->getKey(), $user->getKey()], [
-                        'class' => 'btn btn-xs btn-danger',
-                        'data-post' => 'DELETE',
-                        'data-title' => 'Are you sure?',
+                        'class'        => 'btn btn-xs btn-danger',
+                        'data-post'    => 'DELETE',
+                        'data-title'   => 'Are you sure?',
                         'data-message' => 'Are you sure you want to remove this permission from this role?',
                     ]);
                 };

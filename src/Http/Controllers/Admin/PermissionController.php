@@ -108,7 +108,6 @@ class PermissionController extends Controller
         }
     }
 
-
     /**
      * Deletes the specified permission.
      *

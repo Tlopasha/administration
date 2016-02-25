@@ -14,7 +14,7 @@ class UserPermissionRequest extends Request
     public function rules()
     {
         return [
-            'permissions.*' => 'exists:permissions,id'
+            'permissions.*' => 'exists:permissions,id',
         ];
     }
 

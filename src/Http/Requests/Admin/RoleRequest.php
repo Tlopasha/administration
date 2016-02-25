@@ -16,8 +16,8 @@ class RoleRequest extends Request
         $roles = $this->route('roles');
 
         return [
-            'name' => "required|unique:roles,name,$roles",
-            'label' => 'required'
+            'name'  => "required|unique:roles,name,$roles",
+            'label' => 'required',
         ];
     }
 

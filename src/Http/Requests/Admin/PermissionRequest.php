@@ -16,7 +16,7 @@ class PermissionRequest extends Request
         $permissions = $this->route('permissions');
 
         return [
-            'name' => "required|unique:permissions,name,$permissions",
+            'name'  => "required|unique:permissions,name,$permissions",
             'label' => 'required',
         ];
     }

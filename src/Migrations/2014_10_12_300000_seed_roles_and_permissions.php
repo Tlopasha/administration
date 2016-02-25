@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 
 class SeedRolesAndPermissions extends Migration
@@ -14,118 +14,118 @@ class SeedRolesAndPermissions extends Migration
     public function up()
     {
         $administrator = Role::firstOrCreate([
-            'name' => 'administrator',
+            'name'  => 'administrator',
             'label' => 'Administrator',
         ]);
 
         // User Permissions
         Permission::firstOrCreate([
-            'name' => 'admin.users.index',
+            'name'  => 'admin.users.index',
             'label' => 'View All Users',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.users.create',
+            'name'  => 'admin.users.create',
             'label' => 'Create Users',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.users.edit',
+            'name'  => 'admin.users.edit',
             'label' => 'Edit Users',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.users.show',
+            'name'  => 'admin.users.show',
             'label' => 'View Users',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.users.destroy',
+            'name'  => 'admin.users.destroy',
             'label' => 'Delete Users',
         ]);
 
         // Role Permissions
         Permission::firstOrCreate([
-            'name' => 'admin.roles.index',
+            'name'  => 'admin.roles.index',
             'label' => 'View All Roles',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.roles.create',
+            'name'  => 'admin.roles.create',
             'label' => 'Create Roles',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.roles.edit',
+            'name'  => 'admin.roles.edit',
             'label' => 'Edit Roles',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.roles.show',
+            'name'  => 'admin.roles.show',
             'label' => 'View Roles',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.roles.destroy',
+            'name'  => 'admin.roles.destroy',
             'label' => 'Delete Roles',
         ]);
 
         // Permission Permissions
         Permission::firstOrCreate([
-            'name' => 'admin.permissions.index',
+            'name'  => 'admin.permissions.index',
             'label' => 'View All Permissions',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.permissions.create',
+            'name'  => 'admin.permissions.create',
             'label' => 'Create Permissions',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.permissions.edit',
+            'name'  => 'admin.permissions.edit',
             'label' => 'Edit Permissions',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.permissions.show',
+            'name'  => 'admin.permissions.show',
             'label' => 'View Permissions',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.permissions.destroy',
+            'name'  => 'admin.permissions.destroy',
             'label' => 'Delete Permissions',
         ]);
 
         // User Permission Permissions
         Permission::firstOrCreate([
-            'name' => 'admin.users.permissions.store',
+            'name'  => 'admin.users.permissions.store',
             'label' => 'Add Permissions to Users',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.users.permissions.destroy',
+            'name'  => 'admin.users.permissions.destroy',
             'label' => 'Remove Permissions from Users',
         ]);
 
         // Role Permission Permissions
         Permission::firstOrCreate([
-            'name' => 'admin.roles.permissions.store',
+            'name'  => 'admin.roles.permissions.store',
             'label' => 'Add Permissions to Roles',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.roles.permissions.destroy',
+            'name'  => 'admin.roles.permissions.destroy',
             'label' => 'Remove Permissions from Roles',
         ]);
 
         // Role User Permissions
         Permission::firstOrCreate([
-            'name' => 'admin.roles.users.store',
+            'name'  => 'admin.roles.users.store',
             'label' => 'Add Users to Roles',
         ]);
 
         Permission::firstOrCreate([
-            'name' => 'admin.roles.users.destroy',
+            'name'  => 'admin.roles.users.destroy',
             'label' => 'Remove Users from Roles',
         ]);
 
