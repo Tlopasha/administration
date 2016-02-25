@@ -4,9 +4,9 @@ namespace App\Processors\Admin;
 
 use App\Http\Presenters\Admin\UserPresenter;
 use App\Http\Requests\Admin\UserRequest;
+use App\Jobs\Admin\User\Store;
 use App\Jobs\Admin\User\Update;
 use App\Models\User;
-use App\Jobs\Admin\User\Store;
 use App\Processors\Processor;
 
 class UserProcessor extends Processor
@@ -24,7 +24,7 @@ class UserProcessor extends Processor
     /**
      *  Constructor.
      *
-     * @param User         $user
+     * @param User          $user
      * @param UserPresenter $presenter
      */
     public function __construct(User $user, UserPresenter $presenter)

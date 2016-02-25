@@ -2,15 +2,15 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Http\Presenters\Presenter;
 use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
 use Orchestra\Contracts\Html\Table\Grid as TableGrid;
-use App\Http\Presenters\Presenter;
-use App\Models\Role;
 
 class RolePresenter extends Presenter
 {
@@ -89,7 +89,7 @@ class RolePresenter extends Presenter
                         })->get()->pluck('name', 'id');
                     })
                     ->attributes([
-                        'class' => 'select-users',
+                        'class'    => 'select-users',
                         'multiple' => true,
                     ]);
             });
@@ -129,7 +129,7 @@ class RolePresenter extends Presenter
                         })->get()->pluck('label', 'id');
                     })
                     ->attributes([
-                        'class' => 'select-users',
+                        'class'    => 'select-users',
                         'multiple' => true,
                     ]);
             });
@@ -231,9 +231,9 @@ class RolePresenter extends Presenter
             $table->column('remove', function (Column $column) use ($role) {
                 $column->value = function (User $user) use ($role) {
                     return link_to_route('admin.roles.users.destroy', 'Remove', [$role->getKey(), $user->getKey()], [
-                        'class' => 'btn btn-xs btn-danger',
-                        'data-post' => 'DELETE',
-                        'data-title' => 'Are you sure?',
+                        'class'        => 'btn btn-xs btn-danger',
+                        'data-post'    => 'DELETE',
+                        'data-title'   => 'Are you sure?',
                         'data-message' => 'Are you sure you want to remove this user?',
                     ]);
                 };
@@ -280,9 +280,9 @@ class RolePresenter extends Presenter
             $table->column('remove', function (Column $column) use ($role) {
                 $column->value = function (Permission $permission) use ($role) {
                     return link_to_route('admin.roles.permissions.destroy', 'Remove', [$role->getKey(), $permission->getKey()], [
-                        'class' => 'btn btn-xs btn-danger',
-                        'data-post' => 'DELETE',
-                        'data-title' => 'Are you sure?',
+                        'class'        => 'btn btn-xs btn-danger',
+                        'data-post'    => 'DELETE',
+                        'data-title'   => 'Are you sure?',
                         'data-message' => 'Are you sure you want to remove this permission?',
                     ]);
                 };

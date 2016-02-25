@@ -71,7 +71,7 @@ class Update extends Job
         // and they are the only administrator, that we throw an exception notifying them
         // that they can't do that. Though we want to allow the user to remove the
         // administrator role if more than one administrator exists.
-        if (count ($roles) === 0
+        if (count($roles) === 0
             && $this->user->hasRole($admin)
             && $this->user->getKey() === auth()->user()->getKey()
             && count($administrators) === 1) {

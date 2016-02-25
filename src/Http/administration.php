@@ -13,9 +13,9 @@
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
     Route::get('/', [
-        'as'    => 'admin.welcome.index',
-        'uses'  => 'WelcomeController@index',
-        'middleware' => ['admin.auth']
+        'as'         => 'admin.welcome.index',
+        'uses'       => 'WelcomeController@index',
+        'middleware' => ['admin.auth'],
     ]);
 
     // The administration setup group.
@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
         ]);
 
         Route::get('begin', [
-            'as' => 'begin',
+            'as'   => 'begin',
             'uses' => 'SetupController@begin',
         ]);
 
@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
 
         // The user permissions resource.
         Route::resource('users.permissions', 'UserPermissionController', [
-            'only' => ['store', 'destroy']
+            'only' => ['store', 'destroy'],
         ]);
 
         // The roles resource.
@@ -75,14 +75,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
     });
 
     // The 'admin' route prefixed group.
-    Route::group(['as' => 'admin.', ], function () {
+    Route::group(['as' => 'admin.'], function () {
 
         // Guest Middleware group for login routes.
         Route::group(['middleware' => ['guest']], function () {
             // Administration login view.
             Route::get('auth/login', [
                 'as'    => 'auth.login',
-                'uses'  => 'AuthController@getLogin'
+                'uses'  => 'AuthController@getLogin',
             ]);
 
             // Administration post login view.
@@ -96,7 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
         Route::get('auth/logout', [
             'as'            => 'auth.logout',
             'uses'          => 'AuthController@getLogout',
-            'middleware'    => ['admin.auth']
+            'middleware'    => ['admin.auth'],
         ]);
     });
 

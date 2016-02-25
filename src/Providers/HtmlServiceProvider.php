@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Orchestra\Html\Form\Factory as FormFactory;
-use Orchestra\Html\Table\Factory as TableFactory;
-use Orchestra\Html\HtmlServiceProvider as OrchestraHtmlServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Orchestra\Html\Form\Factory as FormFactory;
+use Orchestra\Html\HtmlServiceProvider as OrchestraHtmlServiceProvider;
+use Orchestra\Html\Table\Factory as TableFactory;
 
 class HtmlServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class HtmlServiceProvider extends ServiceProvider
 
             $factory->setConfig([
                 'format' => '<span class="label label-danger">:message</span>',
-                'view' => 'admin.components.form',
+                'view'   => 'admin.components.form',
             ]);
 
             return $factory;
@@ -34,7 +34,7 @@ class HtmlServiceProvider extends ServiceProvider
 
             $factory->setConfig([
                 'empty' => 'There are no records to display.',
-                'view' => 'admin.components.table',
+                'view'  => 'admin.components.table',
             ]);
 
             return $factory;

@@ -2,9 +2,9 @@
 
 namespace App\Jobs\Admin\Role;
 
-use App\Models\Role;
 use App\Http\Requests\Admin\RoleRequest;
 use App\Jobs\Job;
+use App\Models\Role;
 
 class Store extends Job
 {

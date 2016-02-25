@@ -3,8 +3,8 @@
 namespace App\Jobs\Admin\Role;
 
 use App\Http\Requests\Admin\RoleRequest;
-use App\Models\Role;
 use App\Jobs\Job;
+use App\Models\Role;
 
 class Update extends Job
 {
