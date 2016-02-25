@@ -18,10 +18,10 @@
                 </a>
 
                 <a
-                        data-post="POST"
+                        data-post="DELETE"
                         data-title="Delete Permission?"
                         data-message="Are you sure you want to delete this permission?"
-                        href="{{ route('admin.roles.destroy', [$permission->getKey()]) }}"
+                        href="{{ route('admin.permissions.destroy', [$permission->getKey()]) }}"
                         class="btn btn-xs btn-danger"
                 >
                     <i class="fa fa-trash"></i>

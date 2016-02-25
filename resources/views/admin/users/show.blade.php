@@ -21,7 +21,7 @@
                 @if (request()->user()->getKey() != $user->getKey())
 
                     <a
-                            data-post="POST"
+                            data-post="DELETE"
                             data-title="Delete User?"
                             data-message="Are you sure you want to delete this user?"
                             href="{{ route('admin.users.destroy', [$user->getKey()]) }}"

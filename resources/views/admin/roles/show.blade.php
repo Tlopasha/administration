@@ -21,7 +21,7 @@
                 @if (!request()->user()->hasRole($role->name))
 
                     <a
-                            data-post="POST"
+                            data-post="DELETE"
                             data-title="Delete Role?"
                             data-message="Are you sure you want to delete this role?"
                             href="{{ route('admin.roles.destroy', [$role->getKey()]) }}"

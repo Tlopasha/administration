@@ -15,10 +15,15 @@ class PermissionRequest extends Request
     {
         $permissions = $this->route('permissions');
 
-        return [
-            'name'  => "required|unique:permissions,name,$permissions",
+        $rules = [
             'label' => 'required',
         ];
+
+        if ($this->route()->getName() === 'admin.permissions.create') {
+            $rules['name'] = "required|unique:permissions,name,$permissions";
+        }
+
+        return $rules;
     }
 
     /**

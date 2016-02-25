@@ -4,8 +4,8 @@ namespace App\Processors\Admin;
 
 use App\Http\Presenters\Admin\PermissionPresenter;
 use App\Http\Requests\Admin\PermissionRequest;
-use App\Jobs\Permission\Store;
-use App\Jobs\Permission\Update;
+use App\Jobs\Admin\Permission\Store;
+use App\Jobs\Admin\Permission\Update;
 use App\Models\Permission;
 use App\Processors\Processor;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\Permission;
+namespace App\Jobs\Admin\Permission;
 
 use App\Http\Requests\Admin\PermissionRequest;
 use App\Jobs\Job;
