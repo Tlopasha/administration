@@ -7,6 +7,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Orchestra\Contracts\Html\Form\Field;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
@@ -40,12 +41,16 @@ class RolePresenter extends Presenter
 
             $form->with($role);
 
-            $form->fieldset(function (Fieldset $fieldset) {
-                $fieldset
-                    ->control('input:text', 'name')
-                    ->attributes([
-                        'placeholder' => 'Enter the roles name.',
-                    ]);
+            $form->fieldset(function (Fieldset $fieldset) use ($role) {
+                $fieldset->control('input:text', 'name', function (Field $field) use ($role) {
+                    $attributes = ['placeholder' => 'Enter the roles name.'];
+
+                    if ($role->isAdministrator()) {
+                        $attributes['disabled'] = true;
+                    }
+
+                    $field->attributes($attributes);
+                });
 
                 $fieldset
                     ->control('input:text', 'label')

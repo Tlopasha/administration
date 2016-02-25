@@ -37,7 +37,11 @@ class Update extends Job
      */
     public function handle()
     {
-        $this->role->name = $this->request->input('name', $this->role->name);
+        // Don't allow changing the name of the administrator account.
+        if (!$this->role->isAdministrator()) {
+            $this->role->name = $this->request->input('name', $this->role->name);
+        }
+
         $this->role->label = $this->request->input('label', $this->role->label);
 
         return $this->role->save();
