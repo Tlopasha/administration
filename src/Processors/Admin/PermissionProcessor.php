@@ -3,6 +3,9 @@
 namespace App\Processors\Admin;
 
 use App\Http\Presenters\Admin\PermissionPresenter;
+use App\Http\Requests\Admin\PermissionRequest;
+use App\Jobs\Permission\Store;
+use App\Jobs\Permission\Update;
 use App\Models\Permission;
 use App\Processors\Processor;
 
@@ -54,28 +57,80 @@ class PermissionProcessor extends Processor
         return view('admin.permissions.create', compact('form'));
     }
 
-    public function store()
+    /**
+     * Creates a new permission.
+     *
+     * @param PermissionRequest $request
+     *
+     * @return bool
+     */
+    public function store(PermissionRequest $request)
     {
-        //
+        $permission = $this->permission->newInstance();
+
+        return $this->dispatch(new Store($request, $permission));
     }
 
-    public function show()
+    /**
+     * Displays the specified permission.
+     *
+     * @param int|string $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
     {
-        //
+        $permission = $this->permission->findOrFail($id);
+
+        $users = $this->presenter->tableUsers($permission);
+
+        $roles = $this->presenter->tableRoles($permission);
+
+        return view('admin.permissions.show', compact('permission', 'users', 'roles'));
     }
 
-    public function edit()
+    /**
+     * Displays the form for editing the specified permission.
+     *
+     * @param int|string $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
     {
-        //
+        $permission = $this->permission->findOrFail($id);
+
+        $form = $this->presenter->form($permission);
+
+        return view('admin.permissions.edit', compact('form'));
     }
 
-    public function update()
+    /**
+     * Updates the specified permission.
+     *
+     * @param PermissionRequest $request
+     * @param int|string        $id
+     *
+     * @return bool
+     */
+    public function update(PermissionRequest $request, $id)
     {
-        //
+        $permission = $this->permission->findOrFail($id);
+
+        return $this->dispatch(new Update($request, $permission));
     }
 
-    public function destroy()
+    /**
+     * Deletes the specified permission.
+     *
+     * @param int|string $id
+     *
+     * @return bool
+     */
+    public function destroy($id)
     {
-        //
+        $permission = $this->permission->findOrFail($id);
+
+        return $permission->delete();
     }
 }

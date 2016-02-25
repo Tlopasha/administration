@@ -62,6 +62,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web']], function () {
 
         // The permissions resource.
         Route::resource('permissions', 'PermissionController');
+
+        // The permission roles resource.
+        Route::resource('permissions.roles', 'PermissionRoleController', [
+            'only' => ['store', 'destroy'],
+        ]);
+
+        // The permission users resource.
+        Route::resource('permissions.users', 'PermissionUserController', [
+            'only' => ['store', 'destroy'],
+        ]);
     });
 
     // The 'admin' route prefixed group.
