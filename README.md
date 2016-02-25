@@ -22,9 +22,10 @@ Every application is different, and you shouldn't be locked into an administrato
 
 ## Installation
 
-Require `administration` in your `composer.json` file:
+Require `authorization` and `administration` in your `composer.json` file:
 
 ```json
+"stevebauman/authorization": "1.3.*",
 "stevebauman/administration": "1.0.*"
 ```
 
@@ -40,6 +41,22 @@ Stevebauman\Administration\AdministrationServiceProvider::class,
 Now run `php artisan vendor:publish --tag="authorization"`.
 
 Then run `php arisan vendor:publish --tag="administration"`.
+
+You can now remove the `Stevebauman\Administration\AdministrationServiceProvider` from your `config/app.php` file:
+
+```php
+Stevebauman\Authorization\AuthorizationServiceProvider::class,
+<del>Stevebauman\Administration\AdministrationServiceProvider::class</del>,
+```
+
+Then remove `stevebauman/administration` from your `composer.json` file:
+
+```json
+"stevebauman/authorization": "1.3.*",
+<del>"stevebauman/administration": "1.0.*"</del>
+```
+
+Run `composer update`.
 
 Now insert the following providers in your `config/app.php`:
 
