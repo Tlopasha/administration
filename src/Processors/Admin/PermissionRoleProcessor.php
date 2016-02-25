@@ -41,7 +41,7 @@ class PermissionRoleProcessor extends Processor
      */
     public function store(PermissionRoleRequest $request, $permissionId)
     {
-        $this->authorize('admin.permissions.roles.store');
+        $this->authorize('admin.roles.permissions.store');
 
         $permission = $this->permission->findOrFail($permissionId);
 
@@ -66,7 +66,7 @@ class PermissionRoleProcessor extends Processor
      */
     public function destroy($permissionId, $roleId)
     {
-        $this->authorize('admin.permissions.roles.destroy');
+        $this->authorize('admin.roles.permissions.destroy');
 
         $permission = $this->permission->findOrFail($permissionId);
 
