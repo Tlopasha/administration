@@ -19,7 +19,7 @@ class RoleRequest extends Request
         $role = Role::find($roles);
 
         $rules = [
-            'name' => "required|unique:roles,name,$roles",
+            'name'  => "required|unique:roles,name,$roles",
             'label' => 'required',
         ];
 
