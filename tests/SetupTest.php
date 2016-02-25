@@ -40,7 +40,7 @@ class SetupTest extends TestCase
             ->see('Setup Complete');
 
         $this->seeInDatabase('users', [
-            'name' => 'Administrator',
+            'name'  => 'Administrator',
             'email' => 'admin@email.com',
         ]);
     }
