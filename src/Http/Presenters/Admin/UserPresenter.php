@@ -2,15 +2,15 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Http\Presenters\Presenter;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
 use Orchestra\Contracts\Html\Table\Column;
 use Orchestra\Contracts\Html\Table\Grid as TableGrid;
-use App\Models\User;
-use App\Http\Presenters\Presenter;
 
 class UserPresenter extends Presenter
 {
@@ -64,7 +64,7 @@ class UserPresenter extends Presenter
                             return $user->roles->pluck('id');
                         })
                         ->attributes([
-                            'class' => 'select-roles',
+                            'class'    => 'select-roles',
                             'multiple' => true,
                         ]);
                 }
@@ -117,7 +117,7 @@ class UserPresenter extends Presenter
                         })->get()->pluck('label', 'id');
                     })
                     ->attributes([
-                        'class' => 'select-users',
+                        'class'    => 'select-users',
                         'multiple' => true,
                     ]);
             });
@@ -160,7 +160,7 @@ class UserPresenter extends Presenter
                 $column->value = function (User $user) {
                     $labels = '';
 
-                    foreach($user->roles as $role) {
+                    foreach ($user->roles as $role) {
                         $labels .= $role->display_label.'<br>';
                     };
 
@@ -225,9 +225,9 @@ class UserPresenter extends Presenter
             $table->column('remove', function (Column $column) use ($user) {
                 $column->value = function (Permission $permission) use ($user) {
                     return link_to_route('admin.users.permissions.destroy', 'Remove', [$user->getKey(), $permission->getKey()], [
-                        'class' => 'btn btn-xs btn-danger',
-                        'data-post' => 'DELETE',
-                        'data-title' => 'Are you sure?',
+                        'class'        => 'btn btn-xs btn-danger',
+                        'data-post'    => 'DELETE',
+                        'data-title'   => 'Are you sure?',
                         'data-message' => 'Are you sure you want to remove this permission?',
                     ]);
                 };

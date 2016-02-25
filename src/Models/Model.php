@@ -18,7 +18,7 @@ abstract class Model extends BaseModel
             return $this->created_at->diffForHumans();
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -32,6 +32,6 @@ abstract class Model extends BaseModel
             return $this->updated_at->diffForHumans();
         }
 
-        return null;
+        return;
     }
 }

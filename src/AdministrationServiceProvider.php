@@ -55,19 +55,19 @@ class AdministrationServiceProvider extends ServiceProvider
 
         // Add all publishable scaffolding.
         $this->publishes([
-            $assets => public_path(),
-            $views => resource_path('views'),
+            $assets      => public_path(),
+            $views       => resource_path('views'),
             $controllers => app_path('Http/Controllers'),
-            $presenters => app_path('Http/Presenters'),
-            $requests => app_path('Http/Requests'),
-            $middleware => app_path('Http/Middleware'),
-            $routes => app_path('Http/administration.php'),
-            $models => app_path('Models'),
-            $exceptions => app_path('Exceptions'),
-            $processors => app_path('Processors'),
-            $providers => app_path('Providers'),
-            $jobs => app_path('Jobs'),
-            $migrations => database_path('migrations'),
+            $presenters  => app_path('Http/Presenters'),
+            $requests    => app_path('Http/Requests'),
+            $middleware  => app_path('Http/Middleware'),
+            $routes      => app_path('Http/administration.php'),
+            $models      => app_path('Models'),
+            $exceptions  => app_path('Exceptions'),
+            $processors  => app_path('Processors'),
+            $providers   => app_path('Providers'),
+            $jobs        => app_path('Jobs'),
+            $migrations  => database_path('migrations'),
         ], $tag);
     }
 

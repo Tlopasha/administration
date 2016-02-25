@@ -14,7 +14,7 @@ class RoleUserRequest extends Request
     public function rules()
     {
         return [
-            'users.*' => 'exists:users,id'
+            'users.*' => 'exists:users,id',
         ];
     }
 

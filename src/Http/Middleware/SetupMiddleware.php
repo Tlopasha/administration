@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Models\Role;
 use App\Models\User;
+use Closure;
 use Illuminate\Contracts\Validation\UnauthorizedException;
 use Illuminate\Http\Request;
 

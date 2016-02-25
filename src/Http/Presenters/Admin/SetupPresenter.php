@@ -2,9 +2,9 @@
 
 namespace App\Http\Presenters\Admin;
 
+use App\Http\Presenters\Presenter;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
-use App\Http\Presenters\Presenter;
 
 class SetupPresenter extends Presenter
 {
@@ -18,7 +18,7 @@ class SetupPresenter extends Presenter
         return $this->form->of('admin.setup', function (FormGrid $form) {
             $form->attributes([
                 'method' => 'POST',
-                'url' => route('admin.setup.finish'),
+                'url'    => route('admin.setup.finish'),
             ]);
 
             $form->submit = 'Complete Setup';
