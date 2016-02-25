@@ -2,6 +2,7 @@
 
 namespace App\Processors\Admin;
 
+use App\Exceptions\Admin\CannotDeleteAdministratorRole;
 use App\Http\Presenters\Admin\RolePresenter;
 use App\Http\Requests\Admin\RoleRequest;
 use App\Jobs\Admin\Role\Store;
@@ -141,6 +142,8 @@ class RoleProcessor extends Processor
      *
      * @param int|string $id
      *
+     * @throws CannotDeleteAdministratorRole
+     *
      * @return bool
      */
     public function destroy($id)
@@ -148,6 +151,10 @@ class RoleProcessor extends Processor
         $this->authorize('admin.roles.destroy');
 
         $role = $this->role->findOrFail($id);
+
+        if ($this->role->isAdministrator()) {
+            throw new CannotDeleteAdministratorRole("You can't delete the administrator role.");
+        }
 
         return $role->delete();
     }

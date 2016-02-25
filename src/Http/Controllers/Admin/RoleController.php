@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\Admin\CannotDeleteAdministratorRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleRequest;
 use App\Processors\Admin\RoleProcessor;
@@ -113,12 +114,18 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->processor->destroy($id)) {
-            flash()->success('Success!', 'Successfully deleted role.');
+        try {
+            if ($this->processor->destroy($id)) {
+                flash()->success('Success!', 'Successfully deleted role.');
 
-            return redirect()->route('admin.roles.index');
-        } else {
-            flash()->error('Error!', 'There was an issue deleting this role. Please try again.');
+                return redirect()->route('admin.roles.index');
+            } else {
+                flash()->error('Error!', 'There was an issue deleting this role. Please try again.');
+
+                return redirect()->route('admin.roles.show', [$id]);
+            }
+        } catch (CannotDeleteAdministratorRole $e) {
+            flash()->error('Error!', $e->getMessage());
 
             return redirect()->route('admin.roles.show', [$id]);
         }

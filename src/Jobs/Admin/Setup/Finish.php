@@ -42,7 +42,7 @@ class Finish extends Job
         $this->user->email = $this->request->input('email');
         $this->user->password = bcrypt($this->request->input('password'));
 
-        $role = Role::whereName('administrator')->firstOrFail();
+        $role = Role::whereName(Role::getAdministratorName())->firstOrFail();
 
         if ($this->user->save()) {
             $this->user->assignRole($role);

@@ -58,14 +58,18 @@ class Update extends Job
             $this->user->password = $password;
         }
 
+        // Retrieve the administrators name.
+        $adminName = Role::getAdministratorName();
+
         $roles = $this->request->input('roles', []);
 
-        // Retrieve all administrators.
-        $administrators = $this->user->whereHas('roles', function (Builder $builder) {
-            $builder->whereName('administrator');
+        // Retrieve all administrator users.
+        $administrators = $this->user->whereHas('roles', function (Builder $builder) use ($adminName) {
+            $builder->whereName($adminName);
         })->get();
 
-        $admin = Role::whereName('administrator')->first();
+        // Retrieve the administrator role.
+        $admin = Role::whereName($adminName)->first();
 
         // We need to verify that if the user is trying to remove all roles on themselves,
         // and they are the only administrator, that we throw an exception notifying them

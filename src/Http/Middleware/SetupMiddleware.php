@@ -43,7 +43,7 @@ class SetupMiddleware
     public function handle(Request $request, Closure $next)
     {
         // Retrieve the administrator role.
-        $administrator = $this->role->whereName('administrator')->first();
+        $administrator = $this->role->whereName(Role::getAdministratorName())->first();
 
         // Retrieve the count of users.
         $users = $this->user->count();
