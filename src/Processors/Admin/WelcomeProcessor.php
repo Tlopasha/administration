@@ -45,6 +45,8 @@ class WelcomeProcessor extends Processor
      */
     public function index()
     {
+        $this->authorize('admin.welcome.index');
+
         $users = $this->user->count();
 
         $roles = $this->role->count();

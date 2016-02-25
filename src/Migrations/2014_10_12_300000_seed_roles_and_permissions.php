@@ -18,6 +18,12 @@ class SeedRolesAndPermissions extends Migration
             'label' => 'Administrator',
         ]);
 
+        // Welcome Permissions
+        Permission::firstOrCreate([
+            'name'  => 'admin.welcome.index',
+            'label' => 'View Administrator Welcome',
+        ]);
+
         // User Permissions
         Permission::firstOrCreate([
             'name'  => 'admin.users.index',
@@ -140,6 +146,9 @@ class SeedRolesAndPermissions extends Migration
     public function down()
     {
         Role::whereName('administrator')->delete();
+
+        // Delete Welcome Permission
+        Permission::whereName('admin.welcome.index')->delete();
 
         // Delete User Permissions
         Permission::whereName('admin.users.index')->delete();
