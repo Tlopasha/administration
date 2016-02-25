@@ -23,20 +23,6 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin';
-
-    /**
-     * Where to redirect the users after logging out.
-     *
-     * @var string
-     */
-    protected $redirectAfterLogout = '/admin/auth/login';
-
-    /**
      * @var AuthPresenter
      */
     protected $presenter;
@@ -49,6 +35,12 @@ class AuthController extends Controller
     public function __construct(AuthPresenter $presenter)
     {
         $this->presenter = $presenter;
+
+        // Set the redirect to route after users login.
+        $this->redirectTo = route('admin.welcome.index');
+
+        // Set the redirect after logout route after users logout.
+        $this->redirectAfterLogout = route('admin.auth.login');
     }
 
     /**
