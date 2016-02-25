@@ -10,7 +10,7 @@ Every application is different, and you shouldn't be locked into an administrato
 
 ## Features
 
-- Setup wizard for easy deployment
+- Setup wizard for easy deployment (no console commands required)
 - User management with user specific permissions
 - Permission Management
 - Role Management
