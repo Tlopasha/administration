@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', $role->label)
+@section('title', "Role: $role->label")
 
 @section('content')
 

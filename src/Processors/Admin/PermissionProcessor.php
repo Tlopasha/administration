@@ -84,9 +84,13 @@ class PermissionProcessor extends Processor
 
         $users = $this->presenter->tableUsers($permission);
 
+        $formUsers = $this->presenter->formUsers($permission);
+
         $roles = $this->presenter->tableRoles($permission);
 
-        return view('admin.permissions.show', compact('permission', 'users', 'roles'));
+        $formRoles = $this->presenter->formRoles($permission);
+
+        return view('admin.permissions.show', compact('permission', 'users', 'formUsers', 'roles', 'formRoles'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Presenters\Admin;
 
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Orchestra\Contracts\Html\Form\Field;
 use Orchestra\Contracts\Html\Form\Fieldset;
 use Orchestra\Contracts\Html\Form\Grid as FormGrid;
@@ -59,6 +60,86 @@ class PermissionPresenter extends Presenter
                     ->control('input:text', 'label')
                     ->attributes([
                         'placeholder' => 'Enter the permissions label.',
+                    ]);
+            });
+        });
+    }
+
+    /**
+     * Returns a new form for adding users to the specified permission.
+     *
+     * @param Permission $permission
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function formUsers(Permission $permission)
+    {
+        return $this->form->of('permissions.users', function (FormGrid $form) use ($permission) {
+            $method = 'POST';
+            $url = route('admin.permissions.users.store', [$permission->getKey()]);
+
+            $form->attributes(compact('method', 'url'));
+
+            $form->with($permission);
+
+            $form->layout('admin.components.form-modal');
+
+            $form->submit = 'Save';
+
+            $form->fieldset(function (Fieldset $fieldset) {
+                $fieldset
+                    ->control('input:select', 'users[]')
+                    ->label('Users')
+                    ->options(function (Permission $permission) {
+                        // We'll only allow users to select permissions that
+                        // aren't apart of the current role.
+                        return User::whereDoesntHave('permissions', function (Builder $builder) use ($permission) {
+                            $builder->whereEmail($permission->name);
+                        })->get()->pluck('name', 'id');
+                    })
+                    ->attributes([
+                        'class' => 'select-users',
+                        'multiple' => true,
+                    ]);
+            });
+        });
+    }
+
+    /**
+     * Returns a new form for adding roles to the specified permission.
+     *
+     * @param Permission $permission
+     *
+     * @return \Orchestra\Contracts\Html\Builder
+     */
+    public function formRoles(Permission $permission)
+    {
+        return $this->form->of('permissions.roles', function (FormGrid $form) use ($permission) {
+            $method = 'POST';
+            $url = route('admin.permissions.roles.store', [$permission->getKey()]);
+
+            $form->attributes(compact('method', 'url'));
+
+            $form->with($permission);
+
+            $form->layout('admin.components.form-modal');
+
+            $form->submit = 'Save';
+
+            $form->fieldset(function (Fieldset $fieldset) {
+                $fieldset
+                    ->control('input:select', 'roles[]')
+                    ->label('Roles')
+                    ->options(function (Permission $permission) {
+                        // We'll only allow users to select permissions that
+                        // aren't apart of the current role.
+                        return Role::whereDoesntHave('permissions', function (Builder $builder) use ($permission) {
+                            $builder->whereEmail($permission->name);
+                        })->get()->pluck('label', 'id');
+                    })
+                    ->attributes([
+                        'class' => 'select-users',
+                        'multiple' => true,
                     ]);
             });
         });
