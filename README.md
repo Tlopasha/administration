@@ -44,17 +44,11 @@ Then run `php arisan vendor:publish --tag="administration"`.
 
 You can now remove the `Stevebauman\Administration\AdministrationServiceProvider` from your `config/app.php` file:
 
-```php
-Stevebauman\Authorization\AuthorizationServiceProvider::class,
-<del>Stevebauman\Administration\AdministrationServiceProvider::class</del>,
-```
+<del>`Stevebauman\Administration\AdministrationServiceProvider::class`,</del>
 
 Then remove `stevebauman/administration` from your `composer.json` file:
 
-```json
-"stevebauman/authorization": "1.3.*",
-<del>"stevebauman/administration": "1.0.*"</del>
-```
+<del>`"stevebauman/administration": "1.0.*"`</del>
 
 Run `composer update`.
 
