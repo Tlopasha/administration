@@ -40,6 +40,8 @@ class PermissionProcessor extends Processor
      */
     public function index()
     {
+        $this->authorize('admin.permissions.index');
+
         $permissions = $this->presenter->table($this->permission);
 
         return view('admin.permissions.index', compact('permissions'));
@@ -52,6 +54,8 @@ class PermissionProcessor extends Processor
      */
     public function create()
     {
+        $this->authorize('admin.permissions.create');
+
         $form = $this->presenter->form($this->permission);
 
         return view('admin.permissions.create', compact('form'));
@@ -66,6 +70,8 @@ class PermissionProcessor extends Processor
      */
     public function store(PermissionRequest $request)
     {
+        $this->authorize('admin.permissions.create');
+
         $permission = $this->permission->newInstance();
 
         return $this->dispatch(new Store($request, $permission));
@@ -80,6 +86,8 @@ class PermissionProcessor extends Processor
      */
     public function show($id)
     {
+        $this->authorize('admin.permissions.show');
+
         $permission = $this->permission->findOrFail($id);
 
         $users = $this->presenter->tableUsers($permission);
@@ -102,6 +110,8 @@ class PermissionProcessor extends Processor
      */
     public function edit($id)
     {
+        $this->authorize('admin.permissions.edit');
+
         $permission = $this->permission->findOrFail($id);
 
         $form = $this->presenter->form($permission);
@@ -119,6 +129,8 @@ class PermissionProcessor extends Processor
      */
     public function update(PermissionRequest $request, $id)
     {
+        $this->authorize('admin.permissions.edit');
+
         $permission = $this->permission->findOrFail($id);
 
         return $this->dispatch(new Update($request, $permission));
@@ -133,6 +145,8 @@ class PermissionProcessor extends Processor
      */
     public function destroy($id)
     {
+        $this->authorize('admin.permissions.destroy');
+
         $permission = $this->permission->findOrFail($id);
 
         return $permission->delete();
