@@ -64,6 +64,14 @@ App\Providers\AdminRouteServiceProvider::class,
 App\Providers\HtmlServiceProvider::class,
 ```
 
+Then, insert the following middlewares in your `app/Http/Kernel.php` file
+inside the `$routeMiddleware` property:
+
+```php
+'admin.setup' => \App\Http\Middleware\SetupMiddleware::class,
+'admin.auth'  => \App\Http\Middleware\AdminAuthMiddleware::class,
+```
+
 Once you've done that, visit your site `localhost/admin/setup` to
 create an administrator account.
 
