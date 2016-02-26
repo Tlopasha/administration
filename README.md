@@ -22,12 +22,17 @@ Every application is different, and you shouldn't be locked into an administrato
 
 ## Installation
 
-Require `authorization` and `administration` in your `composer.json` file:
+Require `orchestra/html`, `flash`, `active`, `authorization` and `administration` in your `composer.json` file:
 
 ```json
+"orchestra/html": "~3.2",
+"stevebauman/flash": "1.0.*",
+"stevebauman/active": "1.0.*"
 "stevebauman/authorization": "1.3.*",
 "stevebauman/administration": "1.0.*"
 ```
+
+These are required so you can remove `stevebauman/administration` afterwards.
 
 Run `composer update`.
 
