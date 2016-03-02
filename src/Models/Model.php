@@ -17,8 +17,6 @@ abstract class Model extends BaseModel
         if ($this->created_at instanceof Carbon) {
             return $this->created_at->diffForHumans();
         }
-
-        return;
     }
 
     /**
@@ -31,7 +29,5 @@ abstract class Model extends BaseModel
         if ($this->updated_at instanceof Carbon) {
             return $this->updated_at->diffForHumans();
         }
-
-        return;
     }
 }
