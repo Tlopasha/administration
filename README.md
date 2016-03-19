@@ -45,7 +45,7 @@ Stevebauman\Administration\AdministrationServiceProvider::class,
 
 Now run `php artisan vendor:publish --tag="authorization"`.
 
-Then run `php arisan vendor:publish --tag="administration"`.
+Then run `php artisan vendor:publish --tag="administration"`.
 
 You can now remove the `Stevebauman\Administration\AdministrationServiceProvider` from your `config/app.php` file:
 
