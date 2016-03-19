@@ -27,7 +27,7 @@ Require `orchestra/html`, `flash`, `active`, `authorization` and `administration
 ```json
 "orchestra/html": "~3.2",
 "stevebauman/flash": "1.0.*",
-"stevebauman/active": "1.0.*"
+"stevebauman/active": "1.0.*",
 "stevebauman/authorization": "1.3.*",
 "stevebauman/administration": "1.0.*"
 ```
